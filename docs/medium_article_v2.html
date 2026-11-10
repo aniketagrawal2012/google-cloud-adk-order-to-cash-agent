@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why 90% of AI Agents Fail in Production: Architecting a Self-Healing Multi-Agent System on Google Cloud (ADK 2.2, Gemini 2.5, Context Caching &amp; Cloud Spanner)</title>
+  <title>Why 90% of AI Agents Fail in Production: Architecting a Self-Healing Multi-Agent System on Google Cloud (ADK 2.2, Gemini 4 & 3.8 Flash, Context Caching &amp; Cloud Spanner)</title>
   <meta name="description" content="How to survive the 02:14 AM freight disruption: eliminating O(T^2) token explosions, pre-LLM PII leaks, and partial database corruption — with a live end-to-end deployment on Google Cloud.">
   <meta property="og:title" content="Why 90% of AI Agents Fail in Production: Architecting a Self-Healing Multi-Agent System on Google Cloud">
   <meta property="og:description" content="A Principal Architect Blueprint &amp; Live Google Cloud Console Walkthrough from ADK 2.2 to Vertex AI Agent Engine and Gemini Enterprise.">
@@ -94,7 +94,7 @@
 </head>
 <body>
   <article class="h-entry">
-    <h1 class="p-name">Why 90% of AI Agents Fail in Production: Architecting a Self-Healing Multi-Agent System on Google Cloud (ADK 2.2, Gemini 2.5, Context Caching &amp; Cloud Spanner)</h1>
+    <h1 class="p-name">Why 90% of AI Agents Fail in Production: Architecting a Self-Healing Multi-Agent System on Google Cloud (ADK 2.2, Gemini 4 & 3.8 Flash, Context Caching &amp; Cloud Spanner)</h1>
     <p class="subtitle p-summary">How to survive the 02:14 AM freight disruption: eliminating O(T&sup2;) token explosions, pre-LLM PII leaks, and partial database corruption &mdash; with a live end-to-end deployment on Google Cloud Project <code>aniket-personal</code> from ADK 2.2 to Vertex AI Agent Engine and Gemini Enterprise.</p>
 
     <div class="e-content">
@@ -152,7 +152,7 @@
       <ol>
         <li><strong>Layer 1 &mdash; Experience &amp; Identity Plane (Gemini Enterprise &amp; Cloud IAM):</strong> End users interact via the <strong>Gemini Enterprise</strong> web experience or workspace extensions. Identity is federated via Workforce Identity Federation, propagating scoped OAuth2 / OIDC claims downstream rather than relying on an over-privileged monolithic service account.</li>
         <li><strong>Layer 2 &mdash; Managed Execution Runtime (Vertex AI Agent Engine):</strong> Instead of managing bespoke container orchestrators or ephemeral in-memory session stores, we deploy our agent graph to <strong>Vertex AI Agent Engine</strong> (<code>ReasoningEngine</code>). Agent Engine provides managed auto-scaling, persistent session state durability, and native integration with Vertex AI Evaluation and OpenTelemetry tracing.</li>
-        <li><strong>Layer 3 &mdash; Deterministic Orchestration &amp; FinOps Plane (Google ADK &amp; Vertex AI Context Caching):</strong> Inside the runtime, we use the open-source <strong>Google Agent Development Kit (ADK)</strong> to compose deterministic workflow controllers (<code>SequentialAgent</code>, <code>ParallelAgent</code>, and <code>LoopAgent</code>) alongside specialized <code>LlmAgent</code> reasoning nodes powered by <strong>Gemini 2.5 Pro</strong> and <strong>Gemini 2.5 Flash</strong>. Static enterprise schemas and policy rubrics are pinned in <strong>Vertex AI Context Caching</strong> so multi-turn execution scales linearly (<code>O(T)</code>) rather than quadratically (<code>O(T&sup2;)</code>).</li>
+        <li><strong>Layer 3 &mdash; Deterministic Orchestration &amp; FinOps Plane (Google ADK &amp; Vertex AI Context Caching):</strong> Inside the runtime, we use the open-source <strong>Google Agent Development Kit (ADK)</strong> to compose deterministic workflow controllers (<code>SequentialAgent</code>, <code>ParallelAgent</code>, and <code>LoopAgent</code>) alongside specialized <code>LlmAgent</code> reasoning nodes powered by <strong>Gemini 4 Argon</strong> (<code>gemini-4-argon</code>) and <strong>Gemini 3.8 Flash</strong> (<code>gemini-3.8-flash</code> / <code>gemini-flash-latest</code>). Static enterprise schemas and policy rubrics are pinned in <strong>Vertex AI Context Caching</strong> so multi-turn execution scales linearly (<code>O(T)</code>) rather than quadratically (<code>O(T&sup2;)</code>).</li>
         <li><strong>Layer 4 &mdash; Zero-Trust Security &amp; Governance Plane (Model Armor, Sensitive Data Protection &amp; Apigee):</strong> Every inbound user prompt is screened by <strong>Model Armor</strong> for prompt injection and jailbreak signatures. Every outbound tool call flows through <strong>Apigee API Management</strong> with dynamic OAuth2 downscoping, while ADK lifecycle callbacks (<code>before_tool_callback</code>, <code>after_tool_callback</code>, <code>before_model_callback</code>) invoke <strong>Cloud Sensitive Data Protection (SDP)</strong> to de-identify PII/PCI payloads <em>before</em> they ever enter the Gemini context window.</li>
         <li><strong>Layer 5 &mdash; Transactional State &amp; Observability Plane (Cloud Spanner, AlloyDB, BigQuery &amp; Cloud Trace):</strong> State mutations are coordinated via idempotent compensating sagas backed by <strong>Cloud Spanner</strong>, while every agent turn, tool invocation, and token footprint is emitted as OpenTelemetry spans to <strong>Cloud Trace</strong> and streamed into <strong>BigQuery</strong> for continuous drift analysis.</li>
       </ol>
@@ -229,7 +229,7 @@ def sdp_scrub_after_tool_callback(
       </ul>
       <p>That is a <strong>28,000-token static prefix</strong> before the user even sends a message. In a naive stateless implementation, every time the agent executes a tool call and loops back for the next reasoning step <code>t = 1 ... T</code>, the entire 28,000-token prefix plus the cumulative tool history is re-tokenized and billed at standard input rates:</p>
       <p><code>Cost_stateless(T) = Sum_{t=1..T} [ (P_static + t * Delta_turn) * Rate_input + O_turn * Rate_output ] = O(T^2)</code></p>
-      <p>Over a 10-turn trajectory on <strong>Gemini 2.5 Pro</strong>, re-sending that 28,000-token prefix alongside growing tool outputs consumes roughly <strong>297,000 cumulative input tokens</strong> &mdash; costing <strong><code>$0.371</code> per order resolution</strong> (or <strong><code>$37,100</code> per 100,000 daily orders</strong>).</p>
+      <p>Over a 10-turn trajectory on frontier reasoning models (<strong>Gemini 4 Argon</strong> / <strong>Gemini 2.5 Pro</strong>), re-sending that 28,000-token prefix alongside growing tool outputs consumes roughly <strong>297,000 cumulative input tokens</strong> &mdash; costing <strong><code>$0.371</code> per order resolution</strong> (or <strong><code>$37,100</code> per 100,000 daily orders</strong>).</p>
 
       <figure>
         <img src="https://raw.githubusercontent.com/aniketagrawal2012/google-cloud-adk-order-to-cash-agent/main/docs/assets/gcloud_gif3_context_caching_finops_engine.gif" alt="Vertex AI Context Caching FinOps Architecture">
@@ -261,7 +261,7 @@ def create_enterprise_o2c_context_cache(
         immutable_prefix = f.read()
 
     cache = client.caches.create(
-        model="gemini-2.5-pro",
+        model="gemini-4-argon"  # Latest frontier reasoning model (or "gemini-3.8-flash" / "gemini-flash-latest"),
         config=types.CreateCachedContentConfig(
             display_name="o2c_enterprise_erp_schema_v2_2",
             system_instruction=(
@@ -280,7 +280,7 @@ def create_enterprise_o2c_context_cache(
         <figcaption>Figure 5: Cumulative per-resolution cost scaling across 1 to 20 agent turns &mdash; Stateless Prompt Re-Sending ($0.371 at 10 turns; $1.42 during a 25-turn retry storm) vs. Vertex AI Context Caching + 3-Turn Sliding Window ($0.069 at 10 turns).</figcaption>
       </figure>
 
-      <p>As shown in <strong>Figure 5</strong>, combining <strong>Gemini 2.5 Flash</strong> for parallel Tier-1 triage (<code>ParallelAgent</code> read-only lookups) with <strong>Gemini 2.5 Pro + Context Caching</strong> for complex exception resolution reduces our 10-turn trajectory cost from <strong><code>$0.371</code> to <code>$0.069</code> &mdash; an 81.4% reduction in unit FinOps cost</strong> and a <strong>44.3% reduction in P95 end-to-end latency</strong> (from <code>14.2s</code> down to <code>7.9s</code>).</p>
+      <p>As shown in <strong>Figure 5</strong>, combining <strong>Gemini 3.8 Flash</strong> (<code>gemini-3.8-flash</code> / <code>gemini-flash-latest</code>) for parallel Tier-1 triage (<code>ParallelAgent</code> read-only lookups) with <strong>Gemini 4 Argon + Context Caching</strong> for complex exception resolution reduces our 10-turn trajectory cost from <strong><code>$0.371</code> to <code>$0.069</code> &mdash; an 81.4% reduction in unit FinOps cost</strong> and a <strong>44.3% reduction in P95 end-to-end latency</strong> (from <code>14.2s</code> down to <code>7.9s</code>).</p>
 
       <hr>
 
