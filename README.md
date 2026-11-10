@@ -21,7 +21,7 @@ This repository contains the complete, runnable source code, deterministic callb
    - Performs 3-way match verification (`verify_erp_purchase_order`), queries Cloud Spanner regional inventory (`check_spanner_hub_inventory`), computes BigQuery SLA penalty exposure (`calculate_financial_exposure`), and executes an atomic 3-step remediation saga with automatic reverse compensation (`ROLLBACK_COMPENSATED`) on downstream carrier faults.
 
 4. **Pre-Merge Vertex AI Evaluation Gate (`tests/eval/`)**:
-   - Configured in [`tests/eval/eval_config.yaml`](tests/eval/eval_config.yaml) and [`tests/eval/evalsets/core.evalset.json`](tests/eval/evalsets/core.evalset.json).
+   - Configured in [`tests/eval/eval_config.yaml`](tests/eval/eval_config.yaml) and [`tests/eval/datasets/basic-dataset.json`](tests/eval/datasets/basic-dataset.json).
    - Evaluates 6 adaptive, point-wise, and computation-based metrics (`multi_turn_task_success_v1`, `multi_turn_tool_use_quality_v1`, `custom_response_quality`, `sdp_zero_leakage_compliance`, `saga_trajectory_completeness`, `agent_turn_count`).
 
 ---
@@ -72,8 +72,8 @@ GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
 | `multi_turn_task_success_v1` | Adaptive Rubric | **1.0000** | `0.0000` | `>= 0.95` | PASS |
 | `multi_turn_tool_use_quality_v1` | Adaptive Rubric | **1.0000** | `0.0000` | `>= 0.95` | PASS |
 | `custom_response_quality` | Point-Wise LLM Judge (1-5) | **5.0000** | `0.0000` | `>= 4.50` | PASS |
-| `sdp_zero_leakage_compliance` | Custom Code (`custom_metrics.py`) | **1.0000** | `0.0000` | `== 1.00` | PASS |
-| `saga_trajectory_completeness` | Custom Code (`custom_metrics.py`) | **1.0000** | `0.0000` | `== 1.00` | PASS |
+| `sdp_zero_leakage_compliance` | Custom Code (`eval_config.yaml`) | **1.0000** | `0.0000` | `== 1.00` | PASS |
+| `saga_trajectory_completeness` | Custom Code (`eval_config.yaml`) | **1.0000** | `0.0000` | `== 1.00` | PASS |
 | `agent_turn_count` | Computation | **1.0000** | `0.0000` | `<= 2.00` | PASS |
 
 ### Step 4: Deploy to Vertex AI Agent Engine (`ReasoningEngine`)
@@ -125,10 +125,9 @@ order-to-cash-agent/
 │   └── verify_remote_agent_engine.py  # Live async_stream_query verification against Agent Engine
 └── tests/
     ├── eval/
-    │   ├── custom_metrics.py          # Deterministic SDP zero-leakage & saga completeness graders
-    │   ├── eval_config.yaml           # Vertex AI Eval metric & autorater configuration
-    │   └── evalsets/
-    │       └── core.evalset.json      # Golden evaluation dataset (happy path + rollback compensation)
+    │   ├── eval_config.yaml           # Vertex AI Eval metrics, autorater & custom Python graders
+    │   └── datasets/
+    │       └── basic-dataset.json     # Golden evaluation dataset (happy path + rollback compensation)
     ├── integration/                   # Integration tests for AgentEngineApp & callbacks
     └── unit/                          # Unit tests for tools, SHA-256 loop breaker & SDP redaction
 ```
