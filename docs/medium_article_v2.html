@@ -280,7 +280,7 @@ def create_enterprise_o2c_context_cache(
         <figcaption>Figure 5: Cumulative per-resolution cost scaling across 1 to 20 agent turns &mdash; Stateless Prompt Re-Sending ($0.371 at 10 turns; $1.42 during a 25-turn retry storm) vs. Vertex AI Context Caching + 3-Turn Sliding Window ($0.069 at 10 turns).</figcaption>
       </figure>
 
-      <p>As shown in <strong>Figure 5</strong>, combining <strong>Gemini 2.5 Flash</strong> for parallel Tier-1 triage (`ParallelAgent` read-only lookups) with <strong>Gemini 2.5 Pro + Context Caching</strong> for complex exception resolution reduces our 10-turn trajectory cost from <strong><code>$0.371</code> to <code>$0.069</code> &mdash; an 81.4% reduction in unit FinOps cost</strong> and a <strong>44.3% reduction in P95 end-to-end latency</strong> (from <code>14.2s</code> down to <code>7.9s</code>).</p>
+      <p>As shown in <strong>Figure 5</strong>, combining <strong>Gemini 2.5 Flash</strong> for parallel Tier-1 triage (<code>ParallelAgent</code> read-only lookups) with <strong>Gemini 2.5 Pro + Context Caching</strong> for complex exception resolution reduces our 10-turn trajectory cost from <strong><code>$0.371</code> to <code>$0.069</code> &mdash; an 81.4% reduction in unit FinOps cost</strong> and a <strong>44.3% reduction in P95 end-to-end latency</strong> (from <code>14.2s</code> down to <code>7.9s</code>).</p>
 
       <hr>
 
@@ -403,7 +403,7 @@ uv run adk web --port 8080</code></pre>
       </figure>
 
       <h3>Step 2: Generate Golden Datasets &amp; Grade with Vertex AI Evaluation</h3>
-      <p>Before deploying to Google Cloud, we run our automated evaluation suite using <code>agents-cli eval grade</code> against our golden test scenarios (`evals/golden_o2c_dataset.json`):</p>
+      <p>Before deploying to Google Cloud, we run our automated evaluation suite using <code>agents-cli eval grade</code> against our golden test scenarios (<code>evals/golden_o2c_dataset.json</code>):</p>
 
       <pre><code class="language-bash"># Run Vertex AI Gen AI Evaluation across our golden Order-to-Cash scenarios
 agents-cli eval grade   --agent-module order_to_cash_agent   --dataset evals/golden_o2c_dataset.json   --project aniket-personal   --location us-central1   --output-dir evals/reports</code></pre>
@@ -414,12 +414,12 @@ agents-cli eval grade   --agent-module order_to_cash_agent   --dataset evals/gol
       </figure>
 
       <h3>Step 3: Deploy to Vertex AI Agent Engine &amp; Verify in the Live Google Cloud Console</h3>
-      <p>Once the evaluation gate passes with `1.00` trajectory and completeness scores, we deploy the agent container to <strong>Vertex AI Agent Engine</strong> (`ReasoningEngine`) in `us-central1`:</p>
+      <p>Once the evaluation gate passes with <code>1.00</code> trajectory and completeness scores, we deploy the agent container to <strong>Vertex AI Agent Engine</strong> (<code>ReasoningEngine</code>) in <code>us-central1</code>:</p>
 
       <pre><code class="language-bash"># Deploy the ADK agent to managed Vertex AI Agent Engine
 agents-cli deploy   --agent-module order_to_cash_agent   --display-name "order-to-cash-agent"   --project aniket-personal   --location us-central1</code></pre>
 
-      <p>The deployment provisions managed resource <strong><code>projects/551887116707/locations/us-central1/reasoningEngines/366446609694720000</code></strong>. Let&rsquo;s open the <strong>Google Cloud Console (<code>Gemini Platform &rarr; Agents &rarr; Deployments on Agent Runtime</code>)</strong> on project <code>aniket-personal</code> and inspect what happens under the hood when we execute our `PO-99812` disruption scenario in the cloud:</p>
+      <p>The deployment provisions managed resource <strong><code>projects/551887116707/locations/us-central1/reasoningEngines/366446609694720000</code></strong>. Let&rsquo;s open the <strong>Google Cloud Console (<code>Gemini Platform &rarr; Agents &rarr; Deployments on Agent Runtime</code>)</strong> on project <code>aniket-personal</code> and inspect what happens under the hood when we execute our <code>PO-99812</code> disruption scenario in the cloud:</p>
 
       <figure>
         <img src="https://raw.githubusercontent.com/aniketagrawal2012/google-cloud-adk-order-to-cash-agent/main/docs/assets/gcp_console_live_deployments_and_tool_metrics.png" alt="Live Google Cloud Console Agent Runtime Deployments and Tool Metrics">
@@ -433,7 +433,7 @@ agents-cli deploy   --agent-module order_to_cash_agent   --display-name "order-t
         <figcaption>Figure 12: Live Google Cloud Console Playground JSON Inspector (Session 6134023741836886016): Top (Event 3 of 10): Proof that vendor_bank_iban, swift_routing_code, and confidential_margin_floor are masked by our SDP callback before reaching the LLM. Bottom (Event 9 of 10): Proof of deterministic Cloud Spanner compensating saga recovery (saga_idempotency_key: c66f42fc8a5e) and scoped A2A token authorization.</figcaption>
       </figure>
 
-      <p>Switching to the <strong>Traces</strong> tab in the Google Cloud Console for Trace ID <code>404feb61ac9b6cdbfb092e726e7b94e6</code> (`16 Spans`, `10.4K input / 707 output` GenAI tokens), we can inspect both the visual <strong>OpenTelemetry Execution DAG</strong> and the sub-millisecond <strong>Timeline Waterfall</strong>:</p>
+      <p>Switching to the <strong>Traces</strong> tab in the Google Cloud Console for Trace ID <code>404feb61ac9b6cdbfb092e726e7b94e6</code> (<code>16 Spans</code>, <code>10.4K input / 707 output</code> GenAI tokens), we can inspect both the visual <strong>OpenTelemetry Execution DAG</strong> and the sub-millisecond <strong>Timeline Waterfall</strong>:</p>
 
       <figure>
         <img src="https://raw.githubusercontent.com/aniketagrawal2012/google-cloud-adk-order-to-cash-agent/main/docs/assets/gcp_console_live_otel_trace_dag_and_waterfall.png" alt="Live Google Cloud Console OpenTelemetry 16-Span Trace DAG and Waterfall">
@@ -441,7 +441,7 @@ agents-cli deploy   --agent-module order_to_cash_agent   --display-name "order-t
       </figure>
 
       <h3>Step 4: Register &amp; Publish to Gemini Enterprise</h3>
-      <p>Finally, we register our deployed Agent Engine resource with <strong>Gemini Enterprise</strong> (`Discovery Engine`) so authorized business operations teams can invoke the agent directly from the enterprise web experience with full Workforce Identity governance:</p>
+      <p>Finally, we register our deployed Agent Engine resource with <strong>Gemini Enterprise</strong> (<code>Discovery Engine</code>) so authorized business operations teams can invoke the agent directly from the enterprise web experience with full Workforce Identity governance:</p>
 
       <pre><code class="language-bash"># Publish the deployed Agent Engine reasoning engine to Gemini Enterprise
 agents-cli publish gemini-enterprise   --reasoning-engine-id "projects/551887116707/locations/us-central1/reasoningEngines/366446609694720000"   --display-name "Order-to-Cash Enterprise Orchestrator"   --project aniket-personal   --location global</code></pre>
@@ -477,24 +477,24 @@ for event in remote_agent.stream_query(
       <hr>
 
       <h2>8. 3 Hard-Won Production Gotchas We Hit Deploying to Vertex AI Agent Engine (And How to Fix Them)</h2>
-      <p>Even with a solid architecture, moving from local `adk web` to a cloud-hosted container inside <strong>Vertex AI Agent Engine</strong> surfaces sharp operational edges. Here are the three exact failure modes we hit while deploying `reasoningEngines/366446609694720000` on `aniket-personal` &mdash; and how to avoid them in your own pipeline:</p>
+      <p>Even with a solid architecture, moving from local <code>adk web</code> to a cloud-hosted container inside <strong>Vertex AI Agent Engine</strong> surfaces sharp operational edges. Here are the three exact failure modes we hit while deploying <code>reasoningEngines/366446609694720000</code> on <code>aniket-personal</code> &mdash; and how to avoid them in your own pipeline:</p>
 
       <h3>Gotcha #1: The <code>python:3.11-slim</code> vs. <code>google-cloud-aiplatform[evaluation]</code> Lockfile Trap</h3>
       <ul>
-        <li><strong>The Symptom:</strong> Your local environment runs Python 3.12 or 3.13, where `uv lock` resolves `pandas==3.0.3` and `numpy==2.4.6` (which require Python `&gt;=3.11` or `&gt;=3.12`). When you run `agents-cli deploy`, Cloud Build packages your agent using the managed `python:3.11-slim` runtime image and fails mid-build with `ResolutionImpossible` because `google-cloud-aiplatform[evaluation]` is bundled in the main `[project.dependencies]` array.</li>
-        <li><strong>The Fix:</strong> Keep your runtime container lean! Put only `google-adk`, `google-genai`, `google-cloud-aiplatform[agent_engines]`, and `opentelemetry-sdk` in `[project.dependencies]`, and move `google-cloud-aiplatform[evaluation]`, `pytest`, and `ruff` into `[dependency-groups.dev]`. Your Cloud Build container image shrinks by 420 MB, builds 2.4x faster, and never collides on evaluation-only transitive C extensions.</li>
+        <li><strong>The Symptom:</strong> Your local environment runs Python 3.12 or 3.13, where <code>uv lock</code> resolves <code>pandas==3.0.3</code> and <code>numpy==2.4.6</code> (which require Python <code>&gt;=3.11</code> or <code>&gt;=3.12</code>). When you run <code>agents-cli deploy</code>, Cloud Build packages your agent using the managed <code>python:3.11-slim</code> runtime image and fails mid-build with <code>ResolutionImpossible</code> because <code>google-cloud-aiplatform[evaluation]</code> is bundled in the main <code>[project.dependencies]</code> array.</li>
+        <li><strong>The Fix:</strong> Keep your runtime container lean! Put only <code>google-adk</code>, <code>google-genai</code>, <code>google-cloud-aiplatform[agent_engines]</code>, and <code>opentelemetry-sdk</code> in <code>[project.dependencies]</code>, and move <code>google-cloud-aiplatform[evaluation]</code>, <code>pytest</code>, and <code>ruff</code> into <code>[dependency-groups.dev]</code>. Your Cloud Build container image shrinks by 420 MB, builds 2.4x faster, and never collides on evaluation-only transitive C extensions.</li>
       </ul>
 
       <h3>Gotcha #2: Top-Level <code>google.auth.default()</code> Calls Crash Container Pickle Verification</h3>
       <ul>
-        <li><strong>The Symptom:</strong> Cloud Build finishes `pip install`, runs the post-build verification step (`pickle.load` / module import check), and crashes with `DefaultCredentialsError` or `PermissionDenied` before the container ever reaches Vertex AI Agent Engine.</li>
-        <li><strong>The Fix:</strong> During the Cloud Build image verification step, your agent module is imported in an isolated build sandbox <em>without</em> runtime Vertex AI metadata server credentials attached. <strong>Never</strong> instantiate `genai.Client()`, `spanner.Client()`, or `dlp_v2.DlpServiceClient()` at module import time (`agent.py` top level). Always initialize cloud clients lazily inside tool functions or `before_agent_callback` hooks.</li>
+        <li><strong>The Symptom:</strong> Cloud Build finishes <code>pip install</code>, runs the post-build verification step (<code>pickle.load</code> / module import check), and crashes with <code>DefaultCredentialsError</code> or <code>PermissionDenied</code> before the container ever reaches Vertex AI Agent Engine.</li>
+        <li><strong>The Fix:</strong> During the Cloud Build image verification step, your agent module is imported in an isolated build sandbox <em>without</em> runtime Vertex AI metadata server credentials attached. <strong>Never</strong> instantiate <code>genai.Client()</code>, <code>spanner.Client()</code>, or <code>dlp_v2.DlpServiceClient()</code> at module import time (<code>agent.py</code> top level). Always initialize cloud clients lazily inside tool functions or <code>before_agent_callback</code> hooks.</li>
       </ul>
 
       <h3>Gotcha #3: Silent Vertex AI Context Cache Misses Caused by Dynamic System Prompt Timestamps</h3>
       <ul>
-        <li><strong>The Symptom:</strong> You provision a 28,000-token `CachedContent` resource, yet your Cloud Billing report shows zero cached token hits (`cached_content_token_count = 0`).</li>
-        <li><strong>The Fix:</strong> Vertex AI Context Caching requires the cached prefix to remain <strong>byte-for-byte identical</strong>. If your developer injects `f"Current UTC Time: {datetime.now()}"` or a dynamic `session_id` at the top of `system_instruction`, you invalidate the prefix hash on every single turn! Keep `system_instruction` and the 28,000-token schema 100% static inside the cache, and pass dynamic session metadata (`current_timestamp`, `user_region`, `saga_idempotency_key`) strictly inside the turn-level user/tool delta message.</li>
+        <li><strong>The Symptom:</strong> You provision a 28,000-token <code>CachedContent</code> resource, yet your Cloud Billing report shows zero cached token hits (<code>cached_content_token_count = 0</code>).</li>
+        <li><strong>The Fix:</strong> Vertex AI Context Caching requires the cached prefix to remain <strong>byte-for-byte identical</strong>. If your developer injects <code>f"Current UTC Time: {datetime.now()}"</code> or a dynamic <code>session_id</code> at the top of <code>system_instruction</code>, you invalidate the prefix hash on every single turn! Keep <code>system_instruction</code> and the 28,000-token schema 100% static inside the cache, and pass dynamic session metadata (<code>current_timestamp</code>, <code>user_region</code>, <code>saga_idempotency_key</code>) strictly inside the turn-level user/tool delta message.</li>
       </ul>
 
       <hr>
@@ -504,9 +504,9 @@ for event in remote_agent.stream_query(
       <ol>
         <li><strong>Bounded Graph Orchestration:</strong> Replace unconstrained single-agent ReAct loops with explicit <strong>Google ADK</strong> <code>SequentialAgent</code>, <code>ParallelAgent</code>, and bounded <code>LoopAgent</code> controllers.</li>
         <li><strong>Pre-Inference Zero-Trust Redaction:</strong> Enforce <strong>Cloud Sensitive Data Protection (SDP)</strong> inside ADK <code>after_tool_callback</code> and <code>before_model_callback</code> hooks so raw PII, PCI, and financial secrets never enter the LLM context window.</li>
-        <li><strong>Linear <code>O(T)</code> Token Economics:</strong> Pin static enterprise schemas and tool definitions in <strong>Vertex AI Context Caching</strong> (`CachedContent`) and compact historical tool outputs into structured session state.</li>
+        <li><strong>Linear <code>O(T)</code> Token Economics:</strong> Pin static enterprise schemas and tool definitions in <strong>Vertex AI Context Caching</strong> (<code>CachedContent</code>) and compact historical tool outputs into structured session state.</li>
         <li><strong>Idempotent Compensating Sagas:</strong> Never allow an LLM to mutate enterprise state without a deterministic idempotency key and an automated <strong>Cloud Spanner</strong> compensating rollback path.</li>
-        <li><strong>Continuous Trajectory Evaluation &amp; OpenTelemetry Tracing:</strong> Gate every deployment with <strong>Vertex AI Evaluation</strong> (`response_trajectory_score`, `completeness_score`) and stream full OpenTelemetry waterfall traces into <strong>Google Cloud Trace</strong>.</li>
+        <li><strong>Continuous Trajectory Evaluation &amp; OpenTelemetry Tracing:</strong> Gate every deployment with <strong>Vertex AI Evaluation</strong> (<code>response_trajectory_score</code>, <code>completeness_score</code>) and stream full OpenTelemetry waterfall traces into <strong>Google Cloud Trace</strong>.</li>
       </ol>
 
       <hr>
