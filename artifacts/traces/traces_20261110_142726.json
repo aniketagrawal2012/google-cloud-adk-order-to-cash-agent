@@ -1,0 +1,687 @@
+{
+  "eval_cases": [
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU, check EU hub inventory in Cloud Spanner, calculate financial exposure in BigQuery, and execute the remediation saga."
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "**Order-to-Cash Audit Receipt**\n\n**Purchase Order Verification Details:**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200\n*   **Received Quantity (Rotterdam):** 850\n*   **Shortfall Quantity:** 350\n*   **Discrepancy (USD):** 42000\n\n**Inventory Check Details (Cloud Spanner):**\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620\n*   **Frankfurt Safety Stock Floor:** 200\n*   **Eligible Inter-Hub Transfer Quantity:** 420\n\n**Financial Exposure Details (BigQuery):**\n*   **Total Financial Exposure (USD):** 60500\n*   **SLA Penalty at Risk (USD):** 18500\n*   **Expedited Freight Cost (USD):** 2450\n*   **Net Savings from Remediation (USD):** 58050\n\n**Cloud Spanner Saga Remediation Status:**\n*   **Saga Status:** ALL_COMMITTED\n*   **Committed Steps:**\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\n\n**Sensitive Data Protection (SDP) Redaction Count:** 3\n"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "order_to_cash_full_remediation",
+      "agent_data": {
+        "agents": {
+          "root_agent": {
+            "agent_id": "root_agent",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\n\nReturns:\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.",
+                    "name": "verify_erp_purchase_order",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\n\nArgs:\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\n    hub_region: Regional hub code ('EU' or 'US').\n\nReturns:\n    A dictionary with real-time regional hub stock and safety stock thresholds.",
+                    "name": "check_spanner_hub_inventory",
+                    "parameters": {
+                      "properties": {
+                        "sku_id": {
+                          "type": "STRING"
+                        },
+                        "hub_region": {
+                          "default": "EU",
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "sku_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier.\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\n\nReturns:\n    A dictionary containing financial penalty exposure and recommended remediation budget.",
+                    "name": "calculate_financial_exposure",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        },
+                        "shortfall_qty": {
+                          "default": 350,
+                          "type": "INTEGER"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\n\nSteps:\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\n\nArgs:\n    purchase_order_id: The ERP Purchase Order ID.\n    sku_id: The SKU identifier to transfer.\n    transfer_qty: Quantity of units to lock and transfer.\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\n\nReturns:\n    A deterministic saga execution receipt with forward or reverse-compensated status.",
+                    "name": "execute_spanner_compensating_saga",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        },
+                        "sku_id": {
+                          "type": "STRING"
+                        },
+                        "transfer_qty": {
+                          "type": "INTEGER"
+                        },
+                        "simulate_carrier_fault": {
+                          "default": false,
+                          "type": "BOOLEAN"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id",
+                        "sku_id",
+                        "transfer_qty"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-549dc20c-c538-4649-8e52-7aca2814c39c",
+                        "args": {
+                          "purchase_order_id": "PO-4500019280"
+                        },
+                        "name": "verify_erp_purchase_order"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-549dc20c-c538-4649-8e52-7aca2814c39c",
+                        "name": "verify_erp_purchase_order",
+                        "response": {
+                          "purchase_order_id": "PO-4500019280",
+                          "vendor_name": "Rheinmetall Industrial Components GmbH",
+                          "sku_id": "SKU-7740-EU",
+                          "ordered_qty": 1200,
+                          "received_qty_rotterdam": 850,
+                          "shortfall_qty": 350,
+                          "unit_price_usd": 120.0,
+                          "discrepancy_usd": 42000.0,
+                          "three_way_match_status": "QTY_SHORTFALL_DETECTED",
+                          "vendor_bank_iban": "[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]",
+                          "swift_routing_code": "[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]",
+                          "confidential_margin_floor": "[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]",
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 3,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5",
+                        "args": {
+                          "hub_region": "EU",
+                          "sku_id": "SKU-7740-EU"
+                        },
+                        "name": "check_spanner_hub_inventory"
+                      }
+                    },
+                    {
+                      "function_call": {
+                        "id": "adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29",
+                        "args": {
+                          "shortfall_qty": 350,
+                          "purchase_order_id": "PO-4500019280"
+                        },
+                        "name": "calculate_financial_exposure"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5",
+                        "name": "check_spanner_hub_inventory",
+                        "response": {
+                          "sku_id": "SKU-7740-EU",
+                          "hub_region": "EU",
+                          "spanner_truetime_snapshot": "2026-11-10T08:55:00.000142Z",
+                          "rotterdam_hub_available_qty": 0,
+                          "frankfurt_hub_available_qty": 620,
+                          "frankfurt_safety_stock_floor": 200,
+                          "eligible_inter_hub_transfer_qty": 420,
+                          "recommended_source_hub": "FRANKFURT_HUB_DE02",
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "function_response": {
+                        "id": "adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29",
+                        "name": "calculate_financial_exposure",
+                        "response": {
+                          "purchase_order_id": "PO-4500019280",
+                          "shortfall_inventory_value_usd": 42000.0,
+                          "contract_sla_clause": "INCOTERMS-2026-DDP-48H-PENALTY",
+                          "sla_penalty_at_risk_usd": 18500.0,
+                          "total_financial_exposure_usd": 60500.0,
+                          "expedited_freight_cost_usd": 2450.0,
+                          "net_savings_from_remediation_usd": 58050.0,
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-f97f82f8-1275-4c47-a4c8-6e4d50079753",
+                        "args": {
+                          "purchase_order_id": "PO-4500019280",
+                          "transfer_qty": 350,
+                          "sku_id": "SKU-7740-EU"
+                        },
+                        "name": "execute_spanner_compensating_saga"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-f97f82f8-1275-4c47-a4c8-6e4d50079753",
+                        "name": "execute_spanner_compensating_saga",
+                        "response": {
+                          "saga_idempotency_key": "703762125c03",
+                          "saga_status": "ALL_COMMITTED",
+                          "scoped_a2a_token": {
+                            "allowed_tool": "book_expedited_freight",
+                            "max_cap_usd": 50000.0,
+                            "ttl_seconds": 5
+                          },
+                          "committed_steps": [
+                            "step_1_amend_erp_purchase_order(PO-4500019280) -> COMMITTED (42ms)",
+                            "step_2_lock_frankfurt_hub_stock(SKU-7740-EU, qty=350) -> COMMITTED (38ms)",
+                            "step_3_book_expedited_carrier_a2a(route='DE-FRA -> NL-RTM') -> COMMITTED (114ms)"
+                          ],
+                          "orphaned_writes": 0,
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "**Order-to-Cash Audit Receipt**\n\n**Purchase Order Verification Details:**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200\n*   **Received Quantity (Rotterdam):** 850\n*   **Shortfall Quantity:** 350\n*   **Discrepancy (USD):** 42000\n\n**Inventory Check Details (Cloud Spanner):**\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620\n*   **Frankfurt Safety Stock Floor:** 200\n*   **Eligible Inter-Hub Transfer Quantity:** 420\n\n**Financial Exposure Details (BigQuery):**\n*   **Total Financial Exposure (USD):** 60500\n*   **SLA Penalty at Risk (USD):** 18500\n*   **Expedited Freight Cost (USD):** 2450\n*   **Net Savings from Remediation (USD):** 58050\n\n**Cloud Spanner Saga Remediation Status:**\n*   **Saga Status:** ALL_COMMITTED\n*   **Committed Steps:**\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\n\n**Sensitive Data Protection (SDP) Redaction Count:** 3\n"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU and execute the Cloud Spanner remediation saga with simulate_carrier_fault=True to verify ACID reverse rollback."
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\n\n**Order-to-Cash Audit Receipt**\n\n**1. Purchase Order Verification (ERP Ledger)**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200 units\n*   **Received Quantity (Rotterdam):** 850 units\n*   **Shortfall Quantity:** 350 units\n*   **Unit Price:** $120 USD\n*   **Discrepancy Value:** $42,000 USD\n*   **Vendor:** Rheinmetall Industrial Components GmbH\n*   **SDP Redaction Count (for this step):** 3\n\n**2. Real-time Inventory Check (Cloud Spanner)**\n*   **SKU ID:** SKU-7740-EU\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620 units\n*   **Frankfurt Safety Stock Floor:** 200 units\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\n\n**3. Financial Exposure Analysis (BigQuery)**\n*   **Purchase Order ID:** PO-4500019280\n*   **Shortfall Inventory Value:** $42,000 USD\n*   **SLA Penalty at Risk:** $18,500 USD\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\n*   **Total Financial Exposure:** $60,500 USD\n*   **Net Savings from Remediation:** $58,050 USD\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\n\n**4. Cloud Spanner Remediation Saga Execution**\n*   **Saga Status:** ROLLED_BACK_CLEANLY\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\n*   **Rollback Latency:** 198 ms\n*   **Compensated Steps (in reverse order):**\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\n\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "carrier_fault_spanner_rollback",
+      "agent_data": {
+        "agents": {
+          "root_agent": {
+            "agent_id": "root_agent",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\n\nReturns:\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.",
+                    "name": "verify_erp_purchase_order",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\n\nArgs:\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\n    hub_region: Regional hub code ('EU' or 'US').\n\nReturns:\n    A dictionary with real-time regional hub stock and safety stock thresholds.",
+                    "name": "check_spanner_hub_inventory",
+                    "parameters": {
+                      "properties": {
+                        "sku_id": {
+                          "type": "STRING"
+                        },
+                        "hub_region": {
+                          "default": "EU",
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "sku_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier.\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\n\nReturns:\n    A dictionary containing financial penalty exposure and recommended remediation budget.",
+                    "name": "calculate_financial_exposure",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        },
+                        "shortfall_qty": {
+                          "default": 350,
+                          "type": "INTEGER"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\n\nSteps:\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\n\nArgs:\n    purchase_order_id: The ERP Purchase Order ID.\n    sku_id: The SKU identifier to transfer.\n    transfer_qty: Quantity of units to lock and transfer.\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\n\nReturns:\n    A deterministic saga execution receipt with forward or reverse-compensated status.",
+                    "name": "execute_spanner_compensating_saga",
+                    "parameters": {
+                      "properties": {
+                        "purchase_order_id": {
+                          "type": "STRING"
+                        },
+                        "sku_id": {
+                          "type": "STRING"
+                        },
+                        "transfer_qty": {
+                          "type": "INTEGER"
+                        },
+                        "simulate_carrier_fault": {
+                          "default": false,
+                          "type": "BOOLEAN"
+                        }
+                      },
+                      "required": [
+                        "purchase_order_id",
+                        "sku_id",
+                        "transfer_qty"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-9262cf1e-b571-4542-8151-69f3bf66b5b9",
+                        "args": {
+                          "purchase_order_id": "PO-4500019280"
+                        },
+                        "name": "verify_erp_purchase_order"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-9262cf1e-b571-4542-8151-69f3bf66b5b9",
+                        "name": "verify_erp_purchase_order",
+                        "response": {
+                          "purchase_order_id": "PO-4500019280",
+                          "vendor_name": "Rheinmetall Industrial Components GmbH",
+                          "sku_id": "SKU-7740-EU",
+                          "ordered_qty": 1200,
+                          "received_qty_rotterdam": 850,
+                          "shortfall_qty": 350,
+                          "unit_price_usd": 120.0,
+                          "discrepancy_usd": 42000.0,
+                          "three_way_match_status": "QTY_SHORTFALL_DETECTED",
+                          "vendor_bank_iban": "[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]",
+                          "swift_routing_code": "[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]",
+                          "confidential_margin_floor": "[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]",
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 3,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0",
+                        "args": {
+                          "sku_id": "SKU-7740-EU"
+                        },
+                        "name": "check_spanner_hub_inventory"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0",
+                        "name": "check_spanner_hub_inventory",
+                        "response": {
+                          "sku_id": "SKU-7740-EU",
+                          "hub_region": "EU",
+                          "spanner_truetime_snapshot": "2026-11-10T08:55:00.000142Z",
+                          "rotterdam_hub_available_qty": 0,
+                          "frankfurt_hub_available_qty": 620,
+                          "frankfurt_safety_stock_floor": 200,
+                          "eligible_inter_hub_transfer_qty": 420,
+                          "recommended_source_hub": "FRANKFURT_HUB_DE02",
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-b4ca0357-8d67-448b-9d36-42dd52f664b4",
+                        "args": {
+                          "shortfall_qty": 350,
+                          "purchase_order_id": "PO-4500019280"
+                        },
+                        "name": "calculate_financial_exposure"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-b4ca0357-8d67-448b-9d36-42dd52f664b4",
+                        "name": "calculate_financial_exposure",
+                        "response": {
+                          "purchase_order_id": "PO-4500019280",
+                          "shortfall_inventory_value_usd": 42000.0,
+                          "contract_sla_clause": "INCOTERMS-2026-DDP-48H-PENALTY",
+                          "sla_penalty_at_risk_usd": 18500.0,
+                          "total_financial_exposure_usd": 60500.0,
+                          "expedited_freight_cost_usd": 2450.0,
+                          "net_savings_from_remediation_usd": 58050.0,
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47",
+                        "args": {
+                          "purchase_order_id": "PO-4500019280",
+                          "transfer_qty": 350,
+                          "sku_id": "SKU-7740-EU",
+                          "simulate_carrier_fault": true
+                        },
+                        "name": "execute_spanner_compensating_saga"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47",
+                        "name": "execute_spanner_compensating_saga",
+                        "response": {
+                          "saga_idempotency_key": "e751158925fb",
+                          "saga_status": "ROLLED_BACK_CLEANLY",
+                          "failed_step": "step_3_book_expedited_carrier_a2a",
+                          "downstream_error": "HTTP 503 Service Unavailable from Carrier Booking API",
+                          "compensated_steps_reverse_order": [
+                            {
+                              "step": "step_2_lock_frankfurt_hub_stock",
+                              "inverse_action": "unlock_frankfurt_hub_stock(qty=350)",
+                              "status": "COMPENSATED_OK"
+                            },
+                            {
+                              "step": "step_1_amend_erp_purchase_order",
+                              "inverse_action": "release_po_amendment(po='PO-4500019280')",
+                              "status": "COMPENSATED_OK"
+                            }
+                          ],
+                          "rollback_latency_ms": 198,
+                          "orphaned_writes": 0,
+                          "_sdp_governance_metadata": {
+                            "redacted_fields_this_call": 0,
+                            "cumulative_redacted_fields": 3,
+                            "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\n\n**Order-to-Cash Audit Receipt**\n\n**1. Purchase Order Verification (ERP Ledger)**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200 units\n*   **Received Quantity (Rotterdam):** 850 units\n*   **Shortfall Quantity:** 350 units\n*   **Unit Price:** $120 USD\n*   **Discrepancy Value:** $42,000 USD\n*   **Vendor:** Rheinmetall Industrial Components GmbH\n*   **SDP Redaction Count (for this step):** 3\n\n**2. Real-time Inventory Check (Cloud Spanner)**\n*   **SKU ID:** SKU-7740-EU\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620 units\n*   **Frankfurt Safety Stock Floor:** 200 units\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\n\n**3. Financial Exposure Analysis (BigQuery)**\n*   **Purchase Order ID:** PO-4500019280\n*   **Shortfall Inventory Value:** $42,000 USD\n*   **SLA Penalty at Risk:** $18,500 USD\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\n*   **Total Financial Exposure:** $60,500 USD\n*   **Net Savings from Remediation:** $58,050 USD\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\n\n**4. Cloud Spanner Remediation Saga Execution**\n*   **Saga Status:** ROLLED_BACK_CLEANLY\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\n*   **Rollback Latency:** 198 ms\n*   **Compensated Steps (in reverse order):**\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\n\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps."
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,2715 @@
+{
+  "eval_case_results": [
+    {
+      "eval_case_index": 0,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "multi_turn_task_success_v1": {
+              "metric_name": "multi_turn_task_success_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "0ec72bc9",
+                    "content": {
+                      "property": {
+                        "description": "The response provides the verification details for ERP purchase order PO-4500019280."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly retrieved and presented the PO verification data as required by the system instructions."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "b7ceec97",
+                    "content": {
+                      "property": {
+                        "description": "The response identifies the SKU ID from the purchase order verification."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly identified the SKU ID from the ERP system."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "03566124",
+                    "content": {
+                      "property": {
+                        "description": "The response provides the Spanner hub inventory details for SKU-7740-EU in the EU region."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully checked the regional inventory and provided the details in the audit receipt."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "ce4da233",
+                    "content": {
+                      "property": {
+                        "description": "The response identifies the shortfall quantity from the purchase order verification."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent accurately identified the shortfall quantity from the ERP verification step."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "dc781283",
+                    "content": {
+                      "property": {
+                        "description": "The response provides the calculated financial exposure for the shortfall quantity of PO-4500019280."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly calculated and reported the financial impact as instructed."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "4938f1c3",
+                    "content": {
+                      "property": {
+                        "description": "The response confirms that the Spanner compensating saga to transfer the shortfall quantity for PO-4500019280 and SKU-7740-EU has been successfully completed."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent executed the remediation saga and confirmed its successful completion."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "16d94461",
+                    "content": {
+                      "property": {
+                        "description": "The response successfully generates a structured, executive Order-to-Cash Audit Receipt."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent followed the formatting requirement specified in the system instructions."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "1e70f99e",
+                    "content": {
+                      "property": {
+                        "description": "The Order-to-Cash Audit Receipt includes the Purchase Order Verification Details."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "This required component of the audit receipt was included."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "16a1b1ad",
+                    "content": {
+                      "property": {
+                        "description": "The Order-to-Cash Audit Receipt includes the Inventory Check Details."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "This required component of the audit receipt was included."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "33485891",
+                    "content": {
+                      "property": {
+                        "description": "The Order-to-Cash Audit Receipt includes the Financial Exposure Details."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "This required component of the audit receipt was included."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6137ba6a",
+                    "content": {
+                      "property": {
+                        "description": "The Order-to-Cash Audit Receipt includes the Cloud Spanner Saga Remediation Status."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "This required component of the audit receipt was included."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "fa2740c0",
+                    "content": {
+                      "property": {
+                        "description": "The Order-to-Cash Audit Receipt includes the Sensitive Data Protection (SDP) Redaction Count."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly identified and included the redaction count from the tool metadata as required."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_tool_use_quality_v1": {
+              "metric_name": "multi_turn_tool_use_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "da51af34",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `verify_erp_purchase_order` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})` in Turn 1.\nStep 2: The function name matches the requirement.\nStep 3: The call is valid within the conversation context."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3b8cbdb0",
+                    "content": {
+                      "property": {
+                        "description": "The `verify_erp_purchase_order` tool call adheres to the schema (valid JSON, `purchase_order_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})` in Turn 1.\nStep 2: The argument is a valid JSON object containing the required `purchase_order_id` parameter.\nStep 3: No schema violations detected."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "2741545b",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})` in Turn 1.\nStep 2: The `purchase_order_id` argument is \"PO-4500019280\", which is an exact match.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "7a175e5d",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `check_spanner_hub_inventory` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `check_spanner_hub_inventory({\"sku_id\": \"SKU-7740-EU\", \"hub_region\": \"EU\"})` in Turn 1.\nStep 2: The function name matches.\nStep 3: The call is present in the dialogue history."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "11741f4f",
+                    "content": {
+                      "property": {
+                        "description": "The `check_spanner_hub_inventory` tool call adheres to the schema (valid JSON, `sku_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `check_spanner_hub_inventory({\"sku_id\": \"SKU-7740-EU\", \"hub_region\": \"EU\"})` in Turn 1.\nStep 2: The argument is a valid JSON object containing the required `sku_id` parameter.\nStep 3: No schema violations detected."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "ccb5c2d1",
+                    "content": {
+                      "property": {
+                        "description": "The `sku_id` parameter is exactly 'SKU-7740-EU' or matches the SKU ID returned by the previous `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The output of `verify_erp_purchase_order` in Turn 1 contains `\"sku_id\": \"SKU-7740-EU\"`. The agent called `check_spanner_hub_inventory` with `sku_id=\"SKU-7740-EU\"`.\nStep 2: The argument value \"SKU-7740-EU\" matches the requirement and the propagated value from the previous tool.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "418be3b0",
+                    "content": {
+                      "property": {
+                        "description": "The `hub_region` parameter is set to 'EU' or omitted."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `check_spanner_hub_inventory({\"sku_id\": \"SKU-7740-EU\", \"hub_region\": \"EU\"})` in Turn 1.\nStep 2: The `hub_region` argument is set to \"EU\".\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "8ece67a7",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `calculate_financial_exposure` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `calculate_financial_exposure({\"purchase_order_id\": \"PO-4500019280\", \"shortfall_qty\": 350})` in Turn 1.\nStep 2: The function name matches.\nStep 3: The call is present in the dialogue history."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "82618618",
+                    "content": {
+                      "property": {
+                        "description": "The `calculate_financial_exposure` tool call adheres to the schema (valid JSON, `purchase_order_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `calculate_financial_exposure({\"purchase_order_id\": \"PO-4500019280\", \"shortfall_qty\": 350})` in Turn 1.\nStep 2: The argument is a valid JSON object containing the required `purchase_order_id` parameter.\nStep 3: No schema violations detected."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "b3298c7b",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})` in Turn 1.\nStep 2: The `purchase_order_id` argument is \"PO-4500019280\", which is an exact match.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e678885f",
+                    "content": {
+                      "property": {
+                        "description": "The `shortfall_qty` parameter matches the shortfall quantity returned by the previous `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The output of `verify_erp_purchase_order` in Turn 1 contains `\"shortfall_qty\": 350.0`. The agent called `calculate_financial_exposure` with `shortfall_qty=350`.\nStep 2: The value 350 matches the numeric value 350.0 returned by the previous tool.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "461b079a",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `execute_spanner_compensating_saga` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `execute_spanner_compensating_saga({\"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350, \"sku_id\": \"SKU-7740-EU\"})` in Turn 1.\nStep 2: The function name matches.\nStep 3: The call is present in the dialogue history."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6558a356",
+                    "content": {
+                      "property": {
+                        "description": "The `execute_spanner_compensating_saga` tool call adheres to the schema (valid JSON, `purchase_order_id`, `sku_id`, and `transfer_qty` parameters present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `execute_spanner_compensating_saga({\"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350, \"sku_id\": \"SKU-7740-EU\"})` in Turn 1.\nStep 2: The argument is a valid JSON object containing the required parameters: `purchase_order_id`, `sku_id`, and `transfer_qty`.\nStep 3: No schema violations detected."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "f1a64e7d",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})` in Turn 1.\nStep 2: The `purchase_order_id` argument is \"PO-4500019280\", which is an exact match.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "7367a8fb",
+                    "content": {
+                      "property": {
+                        "description": "The `sku_id` parameter is exactly 'SKU-7740-EU' or matches the SKU ID returned by the previous `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The output of `verify_erp_purchase_order` in Turn 1 contains `\"sku_id\": \"SKU-7740-EU\"`. The agent called `check_spanner_hub_inventory` with `sku_id=\"SKU-7740-EU\"`.\nStep 2: The argument value \"SKU-7740-EU\" matches the requirement and the propagated value from the previous tool.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6e138db6",
+                    "content": {
+                      "property": {
+                        "description": "The `transfer_qty` parameter matches the shortfall quantity returned by the previous `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The output of `verify_erp_purchase_order` in Turn 1 contains `\"shortfall_qty\": 350.0`. The agent called `execute_spanner_compensating_saga` with `transfer_qty=350`.\nStep 2: The value 350 matches the numeric value 350.0 returned by the previous tool.\nStep 3: The parameter value is correct."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e1b960e8",
+                    "content": {
+                      "property": {
+                        "description": "The `simulate_carrier_fault` parameter is omitted or set to false."
+                      }
+                    },
+                    "type": "",
+                    "importance": "LOW"
+                  },
+                  "verdict": true,
+                  "reasoning": "Found `execute_spanner_compensating_saga({\"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350, \"sku_id\": \"SKU-7740-EU\"})` in Turn 1.\nStep 2: The `simulate_carrier_fault` parameter is omitted in the tool call.\nStep 3: According to the tool definition, the default value is `false`, and the user did not request a simulation of a fault."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The agent's final response is excellent and perfectly meets all requirements specified in the user prompt and the grading criteria. It provides a comprehensive 'Order-to-Cash Audit Receipt' that accurately cites every piece of information requested:\n\n1.  **ERP 3-way match shortfall**: The response correctly details the Purchase Order ID, SKU ID, 'QTY_SHORTFALL_DETECTED' status, ordered quantity (1200), received quantity (850), shortfall quantity (350), and discrepancy (42000 USD), all matching the `verify_erp_purchase_order` tool output.\n2.  **Cloud Spanner hub stock**: The response accurately lists the EU Hub Region, Frankfurt Hub Available Quantity (620), Frankfurt Safety Stock Floor (200), and Eligible Inter-Hub Transfer Quantity (420), aligning with the `check_spanner_hub_inventory` tool output.\n3.  **BigQuery financial exposure**: The response precisely reports the Total Financial Exposure (60500 USD), SLA Penalty at Risk (18500 USD), Expedited Freight Cost (2450 USD), and Net Savings from Remediation (58050 USD), all directly from the `calculate_financial_exposure` tool output.\n4.  **Cloud Spanner saga status**: The response correctly states the Saga Status as 'ALL_COMMITTED' and accurately lists the three committed steps of the remediation saga, consistent with the `execute_spanner_compensating_saga` tool output.\n5.  **SDP redaction count**: The response correctly identifies the Sensitive Data Protection (SDP) Redaction Count as 3, which is present in the `_sdp_governance_metadata` of the first tool call (`cumulative_redacted_fields: 3.0`).\n\nThe structure is clear, easy to read, and all factual data points are correct and verifiable from the agent trace.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "sdp_zero_leakage_compliance": {
+              "metric_name": "sdp_zero_leakage_compliance",
+              "score": 1.0,
+              "explanation": "Verified zero raw IBAN/SWIFT leakage in final response (pre-LLM SDP enforced).",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "saga_trajectory_completeness": {
+              "metric_name": "saga_trajectory_completeness",
+              "score": 1.0,
+              "explanation": "Verified ERP audit (True) and Cloud Spanner Saga execution (True).",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "agent_turn_count": {
+              "metric_name": "agent_turn_count",
+              "score": 1.0,
+              "explanation": null,
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 1,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "multi_turn_task_success_v1": {
+              "metric_name": "multi_turn_task_success_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "76ee37ec",
+                    "content": {
+                      "property": {
+                        "description": "The response provides a structured, executive Order-to-Cash Audit Receipt for Purchase Order PO-4500019280."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent followed the formatting instructions to provide a structured receipt."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "2e715df9",
+                    "content": {
+                      "property": {
+                        "description": "The response includes verified numbers regarding the order's 3-way match status, shortfall quantity, regional hub inventory, and financial exposure."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly extracted and cited the relevant data points from the tool outputs as required by the instructions and the property."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "5cbc677a",
+                    "content": {
+                      "property": {
+                        "description": "The response confirms the execution of a compensating saga with a simulated carrier fault and includes the Cloud Spanner saga status demonstrating a reverse saga rollback."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully executed the tool with the simulation parameter and reported the resulting rollback status and compensated steps as required."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "22a09960",
+                    "content": {
+                      "property": {
+                        "description": "The response includes the pre-LLM Sensitive Data Protection (SDP) redaction count."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "This matches the `redacted_fields_this_call` and `cumulative_redacted_fields` values (3.0) returned by the `verify_erp_purchase_order` tool call."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_tool_use_quality_v1": {
+              "metric_name": "multi_turn_tool_use_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "64821ed2",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `verify_erp_purchase_order` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in the conversation history. In Turn 1, the agent calls `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})`.\nStep 2: The function name matches the property.\nStep 3: The call is valid and present in the history."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "2e63cb1c",
+                    "content": {
+                      "property": {
+                        "description": "The `verify_erp_purchase_order` tool call adheres to the schema (valid JSON, `purchase_order_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `verify_erp_purchase_order` call. It is `verify_erp_purchase_order({\"purchase_order_id\": \"PO-4500019280\"})`.\nStep 2: The argument is a valid JSON object containing the required `purchase_order_id` parameter.\nStep 3: The call adheres to the schema."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "4e7481ce",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter in `verify_erp_purchase_order` is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `verify_erp_purchase_order` call.\nStep 2: The `purchase_order_id` argument is \"PO-4500019280\".\nStep 3: This is an exact match for the required value."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "32a4b708",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `check_spanner_hub_inventory` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in the conversation history. In Turn 1, the agent calls `check_spanner_hub_inventory({\"sku_id\": \"SKU-7740-EU\"})`.\nStep 2: The function name matches.\nStep 3: The call is present."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "615ae65f",
+                    "content": {
+                      "property": {
+                        "description": "The `check_spanner_hub_inventory` tool call adheres to the schema (valid JSON, `sku_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `check_spanner_hub_inventory` call.\nStep 2: The argument is a valid JSON object `{\"sku_id\": \"SKU-7740-EU\"}` which contains the required `sku_id`.\nStep 3: The call adheres to the schema."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a2128b6b",
+                    "content": {
+                      "property": {
+                        "description": "The `sku_id` parameter in `check_spanner_hub_inventory` matches the SKU returned by the `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the output of `verify_erp_purchase_order` and the input of `check_spanner_hub_inventory`.\nStep 2: `verify_erp_purchase_order` output contains `\"sku_id\": \"SKU-7740-EU\"`. The `check_spanner_hub_inventory` call uses `sku_id=\"SKU-7740-EU\"`.\nStep 3: The values match exactly."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a69c67f1",
+                    "content": {
+                      "property": {
+                        "description": "The `hub_region` parameter in `check_spanner_hub_inventory` is omitted since the user did not specify a region."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Examine the `check_spanner_hub_inventory` call in Turn 1.\nStep 2: The call is `check_spanner_hub_inventory({\"sku_id\": \"SKU-7740-EU\"})`. The `hub_region` parameter is not present.\nStep 3: The parameter is indeed omitted."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3738868d",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `calculate_financial_exposure` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call. In Turn 1, the agent calls `calculate_financial_exposure({\"purchase_order_id\": \"PO-4500019280\", \"shortfall_qty\": 350})`.\nStep 2: Function name matches.\nStep 3: Call is present."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e4d8e588",
+                    "content": {
+                      "property": {
+                        "description": "The `calculate_financial_exposure` tool call adheres to the schema (valid JSON, `purchase_order_id` parameter present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `calculate_financial_exposure` call.\nStep 2: The argument `{\"purchase_order_id\": \"PO-4500019280\", \"shortfall_qty\": 350}` is valid JSON and includes the required `purchase_order_id`.\nStep 3: The call adheres to the schema."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "1189b1a8",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter in `calculate_financial_exposure` is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `calculate_financial_exposure` call.\nStep 2: The `purchase_order_id` argument is \"PO-4500019280\".\nStep 3: This is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "92217054",
+                    "content": {
+                      "property": {
+                        "description": "The `shortfall_qty` parameter in `calculate_financial_exposure` matches the shortfall quantity returned by the `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the output of `verify_erp_purchase_order` and the input of `calculate_financial_exposure`.\nStep 2: `verify_erp_purchase_order` output contains `\"shortfall_qty\": 350.0`. The agent passed `shortfall_qty: 350` to `calculate_financial_exposure`.\nStep 3: The values match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "038e5c17",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `execute_spanner_compensating_saga` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call. In Turn 1, the agent calls `execute_spanner_compensating_saga(...)`.\nStep 2: Function name matches.\nStep 3: Call is present."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "cb7152be",
+                    "content": {
+                      "property": {
+                        "description": "The `execute_spanner_compensating_saga` tool call adheres to the schema (valid JSON, `purchase_order_id`, `sku_id`, and `transfer_qty` parameters present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `execute_spanner_compensating_saga` call.\nStep 2: The call is `execute_spanner_compensating_saga({\"simulate_carrier_fault\": true, \"sku_id\": \"SKU-7740-EU\", \"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350})`.\nStep 3: It is valid JSON and all required parameters (`purchase_order_id`, `sku_id`, `transfer_qty`) are present."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "7542ffad",
+                    "content": {
+                      "property": {
+                        "description": "The `purchase_order_id` parameter in `execute_spanner_compensating_saga` is exactly 'PO-4500019280'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `execute_spanner_compensating_saga` call.\nStep 2: The `purchase_order_id` is \"PO-4500019280\".\nStep 3: Exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "035ed74d",
+                    "content": {
+                      "property": {
+                        "description": "The `sku_id` parameter in `execute_spanner_compensating_saga` matches the SKU returned by the `verify_erp_purchase_order` call."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Compare `verify_erp_purchase_order` output with `execute_spanner_compensating_saga` input.\nStep 2: Output SKU was \"SKU-7740-EU\". Input SKU is \"SKU-7740-EU\".\nStep 3: Values match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "9e4bad1b",
+                    "content": {
+                      "property": {
+                        "description": "The `transfer_qty` parameter in `execute_spanner_compensating_saga` matches the shortfall quantity or required transfer quantity derived from previous tool calls."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Compare the `shortfall_qty` from `verify_erp_purchase_order` (350.0) with the `transfer_qty` in `execute_spanner_compensating_saga`.\nStep 2: The agent passed `transfer_qty: 350`.\nStep 3: The values match the shortfall detected in the first step."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "750e718f",
+                    "content": {
+                      "property": {
+                        "description": "The `simulate_carrier_fault` parameter in `execute_spanner_compensating_saga` is set to true."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `execute_spanner_compensating_saga` call.\nStep 2: The `simulate_carrier_fault` argument is `true`.\nStep 3: Match confirmed."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The agent's final response is excellent and fully meets all the requirements outlined in the grading rubric. It accurately and comprehensively cites every piece of information requested:\n\n1.  **ERP 3-way match shortfall:** The response clearly presents the '3-Way Match Status: QTY_SHORTFALL_DETECTED' along with all relevant details like ordered quantity, received quantity, shortfall quantity, unit price, discrepancy value, and vendor, all directly verifiable from the `verify_erp_purchase_order` tool output.\n2.  **Cloud Spanner hub stock:** The 'Real-time Inventory Check' section accurately provides the Frankfurt Hub Available Quantity (620 units), Frankfurt Safety Stock Floor (200 units), Eligible Inter-Hub Transfer Quantity (420 units), and Recommended Source Hub (FRANKFURT_HUB_DE02), matching the `check_spanner_hub_inventory` tool output.\n3.  **BigQuery financial exposure:** The 'Financial Exposure Analysis' section details the Shortfall Inventory Value ($42,000 USD), SLA Penalty at Risk ($18,500 USD), Expedited Freight Cost (Estimated) ($2,450 USD), and Total Financial Exposure ($60,500 USD), which align perfectly with the `calculate_financial_exposure` tool output.\n4.  **Cloud Spanner saga status:** The 'Cloud Spanner Remediation Saga Execution' section explicitly states 'Saga Status: ROLLED_BACK_CLEANLY', 'Simulated Fault: HTTP 503 Service Unavailable from Carrier Booking API', 'Failed Step: step_3_book_expedited_carrier_a2a', 'Rollback Latency: 198 ms', and lists the 'Compensated Steps' in reverse order with their statuses, all directly reflecting the `execute_spanner_compensating_saga` tool output.\n5.  **SDP redaction count:** The response correctly cites 'SDP Redaction Count (for this step): 3' within the ERP verification section, which matches the `_sdp_governance_metadata.redacted_fields_this_call` from the `verify_erp_purchase_order` response.\n\nThe response is well-structured, easy to read, and provides a complete audit receipt as requested, demonstrating accurate information extraction and synthesis from multiple tool calls.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "sdp_zero_leakage_compliance": {
+              "metric_name": "sdp_zero_leakage_compliance",
+              "score": 1.0,
+              "explanation": "Verified zero raw IBAN/SWIFT leakage in final response (pre-LLM SDP enforced).",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "saga_trajectory_completeness": {
+              "metric_name": "saga_trajectory_completeness",
+              "score": 1.0,
+              "explanation": "Verified ERP audit (True) and Cloud Spanner Saga execution (True).",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            },
+            "agent_turn_count": {
+              "metric_name": "agent_turn_count",
+              "score": 1.0,
+              "explanation": null,
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary_metrics": [
+    {
+      "metric_name": "multi_turn_task_success_v1",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": 1.0
+    },
+    {
+      "metric_name": "multi_turn_tool_use_quality_v1",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": 1.0
+    },
+    {
+      "metric_name": "custom_response_quality",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 5.0,
+      "stdev_score": 0.0,
+      "pass_rate": null
+    },
+    {
+      "metric_name": "sdp_zero_leakage_compliance",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": null
+    },
+    {
+      "metric_name": "saga_trajectory_completeness",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": null
+    },
+    {
+      "metric_name": "agent_turn_count",
+      "num_cases_total": 2,
+      "num_cases_valid": 2,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": null
+    }
+  ],
+  "win_rates": null,
+  "evaluation_dataset": [
+    {
+      "bigquery_source": null,
+      "gcs_source": null,
+      "eval_cases": [
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU, check EU hub inventory in Cloud Spanner, calculate financial exposure in BigQuery, and execute the remediation saga.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "**Order-to-Cash Audit Receipt**\n\n**Purchase Order Verification Details:**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200\n*   **Received Quantity (Rotterdam):** 850\n*   **Shortfall Quantity:** 350\n*   **Discrepancy (USD):** 42000\n\n**Inventory Check Details (Cloud Spanner):**\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620\n*   **Frankfurt Safety Stock Floor:** 200\n*   **Eligible Inter-Hub Transfer Quantity:** 420\n\n**Financial Exposure Details (BigQuery):**\n*   **Total Financial Exposure (USD):** 60500\n*   **SLA Penalty at Risk (USD):** 18500\n*   **Expedited Freight Cost (USD):** 2450\n*   **Net Savings from Remediation (USD):** 58050\n\n**Cloud Spanner Saga Remediation Status:**\n*   **Saga Status:** ALL_COMMITTED\n*   **Committed Steps:**\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\n\n**Sensitive Data Protection (SDP) Redaction Count:** 3\n",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": null,
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "order_to_cash_full_remediation",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "root_agent": {
+                "agent_id": "root_agent",
+                "agent_type": "LlmAgent",
+                "description": "",
+                "instruction": "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\n\nReturns:\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.",
+                        "name": "verify_erp_purchase_order",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\n\nArgs:\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\n    hub_region: Regional hub code ('EU' or 'US').\n\nReturns:\n    A dictionary with real-time regional hub stock and safety stock thresholds.",
+                        "name": "check_spanner_hub_inventory",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "sku_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "hub_region": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": "EU",
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "sku_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier.\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\n\nReturns:\n    A dictionary containing financial penalty exposure and recommended remediation budget.",
+                        "name": "calculate_financial_exposure",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "shortfall_qty": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": 350,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "INTEGER"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\n\nSteps:\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\n\nArgs:\n    purchase_order_id: The ERP Purchase Order ID.\n    sku_id: The SKU identifier to transfer.\n    transfer_qty: Quantity of units to lock and transfer.\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\n\nReturns:\n    A deterministic saga execution receipt with forward or reverse-compensated status.",
+                        "name": "execute_spanner_compensating_saga",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "sku_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "transfer_qty": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "INTEGER"
+                            },
+                            "simulate_carrier_fault": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": false,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "BOOLEAN"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id",
+                            "sku_id",
+                            "transfer_qty"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-549dc20c-c538-4649-8e52-7aca2814c39c",
+                            "args": {
+                              "purchase_order_id": "PO-4500019280"
+                            },
+                            "name": "verify_erp_purchase_order",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-549dc20c-c538-4649-8e52-7aca2814c39c",
+                            "name": "verify_erp_purchase_order",
+                            "response": {
+                              "purchase_order_id": "PO-4500019280",
+                              "vendor_name": "Rheinmetall Industrial Components GmbH",
+                              "sku_id": "SKU-7740-EU",
+                              "ordered_qty": 1200,
+                              "received_qty_rotterdam": 850,
+                              "shortfall_qty": 350,
+                              "unit_price_usd": 120.0,
+                              "discrepancy_usd": 42000.0,
+                              "three_way_match_status": "QTY_SHORTFALL_DETECTED",
+                              "vendor_bank_iban": "[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]",
+                              "swift_routing_code": "[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]",
+                              "confidential_margin_floor": "[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]",
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 3,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5",
+                            "args": {
+                              "hub_region": "EU",
+                              "sku_id": "SKU-7740-EU"
+                            },
+                            "name": "check_spanner_hub_inventory",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        },
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29",
+                            "args": {
+                              "shortfall_qty": 350,
+                              "purchase_order_id": "PO-4500019280"
+                            },
+                            "name": "calculate_financial_exposure",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5",
+                            "name": "check_spanner_hub_inventory",
+                            "response": {
+                              "sku_id": "SKU-7740-EU",
+                              "hub_region": "EU",
+                              "spanner_truetime_snapshot": "2026-11-10T08:55:00.000142Z",
+                              "rotterdam_hub_available_qty": 0,
+                              "frankfurt_hub_available_qty": 620,
+                              "frankfurt_safety_stock_floor": 200,
+                              "eligible_inter_hub_transfer_qty": 420,
+                              "recommended_source_hub": "FRANKFURT_HUB_DE02",
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        },
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29",
+                            "name": "calculate_financial_exposure",
+                            "response": {
+                              "purchase_order_id": "PO-4500019280",
+                              "shortfall_inventory_value_usd": 42000.0,
+                              "contract_sla_clause": "INCOTERMS-2026-DDP-48H-PENALTY",
+                              "sla_penalty_at_risk_usd": 18500.0,
+                              "total_financial_exposure_usd": 60500.0,
+                              "expedited_freight_cost_usd": 2450.0,
+                              "net_savings_from_remediation_usd": 58050.0,
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-f97f82f8-1275-4c47-a4c8-6e4d50079753",
+                            "args": {
+                              "purchase_order_id": "PO-4500019280",
+                              "transfer_qty": 350,
+                              "sku_id": "SKU-7740-EU"
+                            },
+                            "name": "execute_spanner_compensating_saga",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-f97f82f8-1275-4c47-a4c8-6e4d50079753",
+                            "name": "execute_spanner_compensating_saga",
+                            "response": {
+                              "saga_idempotency_key": "703762125c03",
+                              "saga_status": "ALL_COMMITTED",
+                              "scoped_a2a_token": {
+                                "allowed_tool": "book_expedited_freight",
+                                "max_cap_usd": 50000.0,
+                                "ttl_seconds": 5
+                              },
+                              "committed_steps": [
+                                "step_1_amend_erp_purchase_order(PO-4500019280) -> COMMITTED (42ms)",
+                                "step_2_lock_frankfurt_hub_stock(SKU-7740-EU, qty=350) -> COMMITTED (38ms)",
+                                "step_3_book_expedited_carrier_a2a(route='DE-FRA -> NL-RTM') -> COMMITTED (114ms)"
+                              ],
+                              "orphaned_writes": 0,
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "**Order-to-Cash Audit Receipt**\n\n**Purchase Order Verification Details:**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200\n*   **Received Quantity (Rotterdam):** 850\n*   **Shortfall Quantity:** 350\n*   **Discrepancy (USD):** 42000\n\n**Inventory Check Details (Cloud Spanner):**\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620\n*   **Frankfurt Safety Stock Floor:** 200\n*   **Eligible Inter-Hub Transfer Quantity:** 420\n\n**Financial Exposure Details (BigQuery):**\n*   **Total Financial Exposure (USD):** 60500\n*   **SLA Penalty at Risk (USD):** 18500\n*   **Expedited Freight Cost (USD):** 2450\n*   **Net Savings from Remediation (USD):** 58050\n\n**Cloud Spanner Saga Remediation Status:**\n*   **Saga Status:** ALL_COMMITTED\n*   **Committed Steps:**\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\n\n**Sensitive Data Protection (SDP) Redaction Count:** 3\n",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU and execute the Cloud Spanner remediation saga with simulate_carrier_fault=True to verify ACID reverse rollback.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\n\n**Order-to-Cash Audit Receipt**\n\n**1. Purchase Order Verification (ERP Ledger)**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200 units\n*   **Received Quantity (Rotterdam):** 850 units\n*   **Shortfall Quantity:** 350 units\n*   **Unit Price:** $120 USD\n*   **Discrepancy Value:** $42,000 USD\n*   **Vendor:** Rheinmetall Industrial Components GmbH\n*   **SDP Redaction Count (for this step):** 3\n\n**2. Real-time Inventory Check (Cloud Spanner)**\n*   **SKU ID:** SKU-7740-EU\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620 units\n*   **Frankfurt Safety Stock Floor:** 200 units\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\n\n**3. Financial Exposure Analysis (BigQuery)**\n*   **Purchase Order ID:** PO-4500019280\n*   **Shortfall Inventory Value:** $42,000 USD\n*   **SLA Penalty at Risk:** $18,500 USD\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\n*   **Total Financial Exposure:** $60,500 USD\n*   **Net Savings from Remediation:** $58,050 USD\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\n\n**4. Cloud Spanner Remediation Saga Execution**\n*   **Saga Status:** ROLLED_BACK_CLEANLY\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\n*   **Rollback Latency:** 198 ms\n*   **Compensated Steps (in reverse order):**\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\n\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": null,
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "carrier_fault_spanner_rollback",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "root_agent": {
+                "agent_id": "root_agent",
+                "agent_type": "LlmAgent",
+                "description": "",
+                "instruction": "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\n\nReturns:\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.",
+                        "name": "verify_erp_purchase_order",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\n\nArgs:\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\n    hub_region: Regional hub code ('EU' or 'US').\n\nReturns:\n    A dictionary with real-time regional hub stock and safety stock thresholds.",
+                        "name": "check_spanner_hub_inventory",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "sku_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "hub_region": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": "EU",
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "sku_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\n\nArgs:\n    purchase_order_id: The ERP Purchase Order identifier.\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\n\nReturns:\n    A dictionary containing financial penalty exposure and recommended remediation budget.",
+                        "name": "calculate_financial_exposure",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "shortfall_qty": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": 350,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "INTEGER"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\n\nSteps:\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\n\nArgs:\n    purchase_order_id: The ERP Purchase Order ID.\n    sku_id: The SKU identifier to transfer.\n    transfer_qty: Quantity of units to lock and transfer.\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\n\nReturns:\n    A deterministic saga execution receipt with forward or reverse-compensated status.",
+                        "name": "execute_spanner_compensating_saga",
+                        "parameters": {
+                          "additional_properties": null,
+                          "defs": null,
+                          "ref": null,
+                          "any_of": null,
+                          "default": null,
+                          "description": null,
+                          "enum": null,
+                          "example": null,
+                          "format": null,
+                          "items": null,
+                          "max_items": null,
+                          "max_length": null,
+                          "max_properties": null,
+                          "maximum": null,
+                          "min_items": null,
+                          "min_length": null,
+                          "min_properties": null,
+                          "minimum": null,
+                          "nullable": null,
+                          "pattern": null,
+                          "properties": {
+                            "purchase_order_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "sku_id": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "STRING"
+                            },
+                            "transfer_qty": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": null,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "INTEGER"
+                            },
+                            "simulate_carrier_fault": {
+                              "additional_properties": null,
+                              "defs": null,
+                              "ref": null,
+                              "any_of": null,
+                              "default": false,
+                              "description": null,
+                              "enum": null,
+                              "example": null,
+                              "format": null,
+                              "items": null,
+                              "max_items": null,
+                              "max_length": null,
+                              "max_properties": null,
+                              "maximum": null,
+                              "min_items": null,
+                              "min_length": null,
+                              "min_properties": null,
+                              "minimum": null,
+                              "nullable": null,
+                              "pattern": null,
+                              "properties": null,
+                              "property_ordering": null,
+                              "required": null,
+                              "title": null,
+                              "type": "BOOLEAN"
+                            }
+                          },
+                          "property_ordering": null,
+                          "required": [
+                            "purchase_order_id",
+                            "sku_id",
+                            "transfer_qty"
+                          ],
+                          "title": null,
+                          "type": "OBJECT"
+                        },
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": null,
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-9262cf1e-b571-4542-8151-69f3bf66b5b9",
+                            "args": {
+                              "purchase_order_id": "PO-4500019280"
+                            },
+                            "name": "verify_erp_purchase_order",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-9262cf1e-b571-4542-8151-69f3bf66b5b9",
+                            "name": "verify_erp_purchase_order",
+                            "response": {
+                              "purchase_order_id": "PO-4500019280",
+                              "vendor_name": "Rheinmetall Industrial Components GmbH",
+                              "sku_id": "SKU-7740-EU",
+                              "ordered_qty": 1200,
+                              "received_qty_rotterdam": 850,
+                              "shortfall_qty": 350,
+                              "unit_price_usd": 120.0,
+                              "discrepancy_usd": 42000.0,
+                              "three_way_match_status": "QTY_SHORTFALL_DETECTED",
+                              "vendor_bank_iban": "[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]",
+                              "swift_routing_code": "[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]",
+                              "confidential_margin_floor": "[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]",
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 3,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0",
+                            "args": {
+                              "sku_id": "SKU-7740-EU"
+                            },
+                            "name": "check_spanner_hub_inventory",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0",
+                            "name": "check_spanner_hub_inventory",
+                            "response": {
+                              "sku_id": "SKU-7740-EU",
+                              "hub_region": "EU",
+                              "spanner_truetime_snapshot": "2026-11-10T08:55:00.000142Z",
+                              "rotterdam_hub_available_qty": 0,
+                              "frankfurt_hub_available_qty": 620,
+                              "frankfurt_safety_stock_floor": 200,
+                              "eligible_inter_hub_transfer_qty": 420,
+                              "recommended_source_hub": "FRANKFURT_HUB_DE02",
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-b4ca0357-8d67-448b-9d36-42dd52f664b4",
+                            "args": {
+                              "shortfall_qty": 350,
+                              "purchase_order_id": "PO-4500019280"
+                            },
+                            "name": "calculate_financial_exposure",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-b4ca0357-8d67-448b-9d36-42dd52f664b4",
+                            "name": "calculate_financial_exposure",
+                            "response": {
+                              "purchase_order_id": "PO-4500019280",
+                              "shortfall_inventory_value_usd": 42000.0,
+                              "contract_sla_clause": "INCOTERMS-2026-DDP-48H-PENALTY",
+                              "sla_penalty_at_risk_usd": 18500.0,
+                              "total_financial_exposure_usd": 60500.0,
+                              "expedited_freight_cost_usd": 2450.0,
+                              "net_savings_from_remediation_usd": 58050.0,
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47",
+                            "args": {
+                              "purchase_order_id": "PO-4500019280",
+                              "transfer_qty": 350,
+                              "sku_id": "SKU-7740-EU",
+                              "simulate_carrier_fault": true
+                            },
+                            "name": "execute_spanner_compensating_saga",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47",
+                            "name": "execute_spanner_compensating_saga",
+                            "response": {
+                              "saga_idempotency_key": "e751158925fb",
+                              "saga_status": "ROLLED_BACK_CLEANLY",
+                              "failed_step": "step_3_book_expedited_carrier_a2a",
+                              "downstream_error": "HTTP 503 Service Unavailable from Carrier Booking API",
+                              "compensated_steps_reverse_order": [
+                                {
+                                  "step": "step_2_lock_frankfurt_hub_stock",
+                                  "inverse_action": "unlock_frankfurt_hub_stock(qty=350)",
+                                  "status": "COMPENSATED_OK"
+                                },
+                                {
+                                  "step": "step_1_amend_erp_purchase_order",
+                                  "inverse_action": "release_po_amendment(po='PO-4500019280')",
+                                  "status": "COMPENSATED_OK"
+                                }
+                              ],
+                              "rollback_latency_ms": 198,
+                              "orphaned_writes": 0,
+                              "_sdp_governance_metadata": {
+                                "redacted_fields_this_call": 0,
+                                "cumulative_redacted_fields": 3,
+                                "policy": "GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED"
+                              }
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "root_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\n\n**Order-to-Cash Audit Receipt**\n\n**1. Purchase Order Verification (ERP Ledger)**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200 units\n*   **Received Quantity (Rotterdam):** 850 units\n*   **Shortfall Quantity:** 350 units\n*   **Unit Price:** $120 USD\n*   **Discrepancy Value:** $42,000 USD\n*   **Vendor:** Rheinmetall Industrial Components GmbH\n*   **SDP Redaction Count (for this step):** 3\n\n**2. Real-time Inventory Check (Cloud Spanner)**\n*   **SKU ID:** SKU-7740-EU\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620 units\n*   **Frankfurt Safety Stock Floor:** 200 units\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\n\n**3. Financial Exposure Analysis (BigQuery)**\n*   **Purchase Order ID:** PO-4500019280\n*   **Shortfall Inventory Value:** $42,000 USD\n*   **SLA Penalty at Risk:** $18,500 USD\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\n*   **Total Financial Exposure:** $60,500 USD\n*   **Net Savings from Remediation:** $58,050 USD\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\n\n**4. Cloud Spanner Remediation Saga Execution**\n*   **Saga Status:** ROLLED_BACK_CLEANLY\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\n*   **Rollback Latency:** 198 ms\n*   **Compensated Steps (in reverse order):**\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\n\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": null,
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null
+        }
+      ],
+      "eval_dataset_df": null,
+      "candidate_name": null
+    }
+  ],
+  "metadata": {
+    "candidate_names": [
+      "candidate_1"
+    ],
+    "dataset_name": null,
+    "dataset_id": null,
+    "creation_timestamp": "2026-11-10T09:01:47.819187Z",
+    "dataset": [
+      {
+        "prompt_display_text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU, check EU hub inventory in Cloud Spanner, calculate financial exposure in BigQuery, and execute the remediation saga.",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Audit Purchase Order PO-4500019280 for SKU-7740-EU, check EU hub inventory in Cloud Spanner, calculate financial exposure in BigQuery, and execute the remediation saga.\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "",
+        "reference_raw_json": "",
+        "response_display_text": "**Order-to-Cash Audit Receipt**\n\n**Purchase Order Verification Details:**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200\n*   **Received Quantity (Rotterdam):** 850\n*   **Shortfall Quantity:** 350\n*   **Discrepancy (USD):** 42000\n\n**Inventory Check Details (Cloud Spanner):**\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620\n*   **Frankfurt Safety Stock Floor:** 200\n*   **Eligible Inter-Hub Transfer Quantity:** 420\n\n**Financial Exposure Details (BigQuery):**\n*   **Total Financial Exposure (USD):** 60500\n*   **SLA Penalty at Risk (USD):** 18500\n*   **Expedited Freight Cost (USD):** 2450\n*   **Net Savings from Remediation (USD):** 58050\n\n**Cloud Spanner Saga Remediation Status:**\n*   **Saga Status:** ALL_COMMITTED\n*   **Committed Steps:**\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\n\n**Sensitive Data Protection (SDP) Redaction Count:** 3\n",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"**Order-to-Cash Audit Receipt**\\n\\n**Purchase Order Verification Details:**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **SKU ID:** SKU-7740-EU\\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\\n*   **Ordered Quantity:** 1200\\n*   **Received Quantity (Rotterdam):** 850\\n*   **Shortfall Quantity:** 350\\n*   **Discrepancy (USD):** 42000\\n\\n**Inventory Check Details (Cloud Spanner):**\\n*   **Hub Region:** EU\\n*   **Frankfurt Hub Available Quantity:** 620\\n*   **Frankfurt Safety Stock Floor:** 200\\n*   **Eligible Inter-Hub Transfer Quantity:** 420\\n\\n**Financial Exposure Details (BigQuery):**\\n*   **Total Financial Exposure (USD):** 60500\\n*   **SLA Penalty at Risk (USD):** 18500\\n*   **Expedited Freight Cost (USD):** 2450\\n*   **Net Savings from Remediation (USD):** 58050\\n\\n**Cloud Spanner Saga Remediation Status:**\\n*   **Saga Status:** ALL_COMMITTED\\n*   **Committed Steps:**\\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\\n\\n**Sensitive Data Protection (SDP) Redaction Count:** 3\\n\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"root_agent\": {\"agent_id\": \"root_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"\", \"instruction\": \"You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.\", \"tools\": [{\"function_declarations\": [{\"description\": \"Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\\n\\nReturns:\\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.\", \"name\": \"verify_erp_purchase_order\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}}, \"required\": [\"purchase_order_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\\n\\nArgs:\\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\\n    hub_region: Regional hub code ('EU' or 'US').\\n\\nReturns:\\n    A dictionary with real-time regional hub stock and safety stock thresholds.\", \"name\": \"check_spanner_hub_inventory\", \"parameters\": {\"properties\": {\"sku_id\": {\"type\": \"STRING\"}, \"hub_region\": {\"default\": \"EU\", \"type\": \"STRING\"}}, \"required\": [\"sku_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order identifier.\\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\\n\\nReturns:\\n    A dictionary containing financial penalty exposure and recommended remediation budget.\", \"name\": \"calculate_financial_exposure\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}, \"shortfall_qty\": {\"default\": 350, \"type\": \"INTEGER\"}}, \"required\": [\"purchase_order_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\\n\\nSteps:\\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order ID.\\n    sku_id: The SKU identifier to transfer.\\n    transfer_qty: Quantity of units to lock and transfer.\\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\\n\\nReturns:\\n    A deterministic saga execution receipt with forward or reverse-compensated status.\", \"name\": \"execute_spanner_compensating_saga\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}, \"sku_id\": {\"type\": \"STRING\"}, \"transfer_qty\": {\"type\": \"INTEGER\"}, \"simulate_carrier_fault\": {\"default\": false, \"type\": \"BOOLEAN\"}}, \"required\": [\"purchase_order_id\", \"sku_id\", \"transfer_qty\"], \"type\": \"OBJECT\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-549dc20c-c538-4649-8e52-7aca2814c39c\", \"args\": {\"purchase_order_id\": \"PO-4500019280\"}, \"name\": \"verify_erp_purchase_order\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-549dc20c-c538-4649-8e52-7aca2814c39c\", \"name\": \"verify_erp_purchase_order\", \"response\": {\"purchase_order_id\": \"PO-4500019280\", \"vendor_name\": \"Rheinmetall Industrial Components GmbH\", \"sku_id\": \"SKU-7740-EU\", \"ordered_qty\": 1200, \"received_qty_rotterdam\": 850, \"shortfall_qty\": 350, \"unit_price_usd\": 120.0, \"discrepancy_usd\": 42000.0, \"three_way_match_status\": \"QTY_SHORTFALL_DETECTED\", \"vendor_bank_iban\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]\", \"swift_routing_code\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]\", \"confidential_margin_floor\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]\", \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 3, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5\", \"args\": {\"hub_region\": \"EU\", \"sku_id\": \"SKU-7740-EU\"}, \"name\": \"check_spanner_hub_inventory\"}}, {\"function_call\": {\"id\": \"adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29\", \"args\": {\"shortfall_qty\": 350, \"purchase_order_id\": \"PO-4500019280\"}, \"name\": \"calculate_financial_exposure\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-00c8686f-0ee9-4c11-8df9-9fbde22075b5\", \"name\": \"check_spanner_hub_inventory\", \"response\": {\"sku_id\": \"SKU-7740-EU\", \"hub_region\": \"EU\", \"spanner_truetime_snapshot\": \"2026-11-10T08:55:00.000142Z\", \"rotterdam_hub_available_qty\": 0, \"frankfurt_hub_available_qty\": 620, \"frankfurt_safety_stock_floor\": 200, \"eligible_inter_hub_transfer_qty\": 420, \"recommended_source_hub\": \"FRANKFURT_HUB_DE02\", \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}, {\"function_response\": {\"id\": \"adk-4f2ddf93-2c3a-458c-8ba0-bb8e1bf41e29\", \"name\": \"calculate_financial_exposure\", \"response\": {\"purchase_order_id\": \"PO-4500019280\", \"shortfall_inventory_value_usd\": 42000.0, \"contract_sla_clause\": \"INCOTERMS-2026-DDP-48H-PENALTY\", \"sla_penalty_at_risk_usd\": 18500.0, \"total_financial_exposure_usd\": 60500.0, \"expedited_freight_cost_usd\": 2450.0, \"net_savings_from_remediation_usd\": 58050.0, \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-f97f82f8-1275-4c47-a4c8-6e4d50079753\", \"args\": {\"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350, \"sku_id\": \"SKU-7740-EU\"}, \"name\": \"execute_spanner_compensating_saga\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-f97f82f8-1275-4c47-a4c8-6e4d50079753\", \"name\": \"execute_spanner_compensating_saga\", \"response\": {\"saga_idempotency_key\": \"703762125c03\", \"saga_status\": \"ALL_COMMITTED\", \"scoped_a2a_token\": {\"allowed_tool\": \"book_expedited_freight\", \"max_cap_usd\": 50000.0, \"ttl_seconds\": 5}, \"committed_steps\": [\"step_1_amend_erp_purchase_order(PO-4500019280) -> COMMITTED (42ms)\", \"step_2_lock_frankfurt_hub_stock(SKU-7740-EU, qty=350) -> COMMITTED (38ms)\", \"step_3_book_expedited_carrier_a2a(route='DE-FRA -> NL-RTM') -> COMMITTED (114ms)\"], \"orphaned_writes\": 0, \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"text\": \"**Order-to-Cash Audit Receipt**\\n\\n**Purchase Order Verification Details:**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **SKU ID:** SKU-7740-EU\\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\\n*   **Ordered Quantity:** 1200\\n*   **Received Quantity (Rotterdam):** 850\\n*   **Shortfall Quantity:** 350\\n*   **Discrepancy (USD):** 42000\\n\\n**Inventory Check Details (Cloud Spanner):**\\n*   **Hub Region:** EU\\n*   **Frankfurt Hub Available Quantity:** 620\\n*   **Frankfurt Safety Stock Floor:** 200\\n*   **Eligible Inter-Hub Transfer Quantity:** 420\\n\\n**Financial Exposure Details (BigQuery):**\\n*   **Total Financial Exposure (USD):** 60500\\n*   **SLA Penalty at Risk (USD):** 18500\\n*   **Expedited Freight Cost (USD):** 2450\\n*   **Net Savings from Remediation (USD):** 58050\\n\\n**Cloud Spanner Saga Remediation Status:**\\n*   **Saga Status:** ALL_COMMITTED\\n*   **Committed Steps:**\\n    1.  Amend ERP Purchase Order (PO-4500019280) -> COMMITTED\\n    2.  Lock Frankfurt Hub Stock (SKU-7740-EU, qty=350) -> COMMITTED\\n    3.  Book Expedited Carrier A2A (route='DE-FRA -> NL-RTM') -> COMMITTED\\n\\n**Sensitive Data Protection (SDP) Redaction Count:** 3\\n\"}], \"role\": \"model\"}}]}]}"
+      },
+      {
+        "prompt_display_text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU and execute the Cloud Spanner remediation saga with simulate_carrier_fault=True to verify ACID reverse rollback.",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Audit Purchase Order PO-4500019280 for SKU-7740-EU and execute the Cloud Spanner remediation saga with simulate_carrier_fault=True to verify ACID reverse rollback.\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "",
+        "reference_raw_json": "",
+        "response_display_text": "Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\n\n**Order-to-Cash Audit Receipt**\n\n**1. Purchase Order Verification (ERP Ledger)**\n*   **Purchase Order ID:** PO-4500019280\n*   **SKU ID:** SKU-7740-EU\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\n*   **Ordered Quantity:** 1200 units\n*   **Received Quantity (Rotterdam):** 850 units\n*   **Shortfall Quantity:** 350 units\n*   **Unit Price:** $120 USD\n*   **Discrepancy Value:** $42,000 USD\n*   **Vendor:** Rheinmetall Industrial Components GmbH\n*   **SDP Redaction Count (for this step):** 3\n\n**2. Real-time Inventory Check (Cloud Spanner)**\n*   **SKU ID:** SKU-7740-EU\n*   **Hub Region:** EU\n*   **Frankfurt Hub Available Quantity:** 620 units\n*   **Frankfurt Safety Stock Floor:** 200 units\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\n\n**3. Financial Exposure Analysis (BigQuery)**\n*   **Purchase Order ID:** PO-4500019280\n*   **Shortfall Inventory Value:** $42,000 USD\n*   **SLA Penalty at Risk:** $18,500 USD\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\n*   **Total Financial Exposure:** $60,500 USD\n*   **Net Savings from Remediation:** $58,050 USD\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\n\n**4. Cloud Spanner Remediation Saga Execution**\n*   **Saga Status:** ROLLED_BACK_CLEANLY\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\n*   **Rollback Latency:** 198 ms\n*   **Compensated Steps (in reverse order):**\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\n\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\\n\\n**Order-to-Cash Audit Receipt**\\n\\n**1. Purchase Order Verification (ERP Ledger)**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **SKU ID:** SKU-7740-EU\\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\\n*   **Ordered Quantity:** 1200 units\\n*   **Received Quantity (Rotterdam):** 850 units\\n*   **Shortfall Quantity:** 350 units\\n*   **Unit Price:** $120 USD\\n*   **Discrepancy Value:** $42,000 USD\\n*   **Vendor:** Rheinmetall Industrial Components GmbH\\n*   **SDP Redaction Count (for this step):** 3\\n\\n**2. Real-time Inventory Check (Cloud Spanner)**\\n*   **SKU ID:** SKU-7740-EU\\n*   **Hub Region:** EU\\n*   **Frankfurt Hub Available Quantity:** 620 units\\n*   **Frankfurt Safety Stock Floor:** 200 units\\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\\n\\n**3. Financial Exposure Analysis (BigQuery)**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **Shortfall Inventory Value:** $42,000 USD\\n*   **SLA Penalty at Risk:** $18,500 USD\\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\\n*   **Total Financial Exposure:** $60,500 USD\\n*   **Net Savings from Remediation:** $58,050 USD\\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\\n\\n**4. Cloud Spanner Remediation Saga Execution**\\n*   **Saga Status:** ROLLED_BACK_CLEANLY\\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\\n*   **Rollback Latency:** 198 ms\\n*   **Compensated Steps (in reverse order):**\\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\\n\\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"root_agent\": {\"agent_id\": \"root_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"\", \"instruction\": \"You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). When auditing a Purchase Order discrepancy or supply-chain shortfall:\\n1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\\n2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\\n3. Call `calculate_financial_exposure` to quantify BigQuery SLA penalty risk and net remediation savings.\\n4. Call `execute_spanner_compensating_saga` to execute the atomic remediation (or demonstrate reverse saga rollback if the user requests simulating a carrier fault).\\n5. Provide a structured, executive Order-to-Cash Audit Receipt citing every verified number, the Cloud Spanner saga status, and the pre-LLM Sensitive Data Protection (SDP) redaction count.\", \"tools\": [{\"function_declarations\": [{\"description\": \"Queries the SAP/ERP Order-to-Cash ledger to verify 3-way match status for a Purchase Order.\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order identifier (e.g., 'PO-4500019280').\\n\\nReturns:\\n    A dictionary containing the 3-way match discrepancy, SKU details, and vendor metadata.\", \"name\": \"verify_erp_purchase_order\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}}, \"required\": [\"purchase_order_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Queries Google Cloud Spanner regional inventory hubs with TrueTime external consistency.\\n\\nArgs:\\n    sku_id: The catalog SKU identifier (e.g., 'SKU-7740-EU').\\n    hub_region: Regional hub code ('EU' or 'US').\\n\\nReturns:\\n    A dictionary with real-time regional hub stock and safety stock thresholds.\", \"name\": \"check_spanner_hub_inventory\", \"parameters\": {\"properties\": {\"sku_id\": {\"type\": \"STRING\"}, \"hub_region\": {\"default\": \"EU\", \"type\": \"STRING\"}}, \"required\": [\"sku_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Queries BigQuery financial exposure tables to compute SLA penalty risk and order margin impact.\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order identifier.\\n    shortfall_qty: Number of unfulfilled units subject to SLA penalty.\\n\\nReturns:\\n    A dictionary containing financial penalty exposure and recommended remediation budget.\", \"name\": \"calculate_financial_exposure\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}, \"shortfall_qty\": {\"default\": 350, \"type\": \"INTEGER\"}}, \"required\": [\"purchase_order_id\"], \"type\": \"OBJECT\"}}]}, {\"function_declarations\": [{\"description\": \"Executes an atomic 3-step Order-to-Cash remediation saga backed by Cloud Spanner.\\n\\nSteps:\\n  1. Amend ERP Purchase Order split allocation (inverse: release_po_amendment)\\n  2. Lock transfer inventory in Frankfurt Hub (inverse: unlock_frankfurt_hub_stock)\\n  3. Book expedited freight carrier via scoped A2A token (max_cap=$50,000, ttl=5s)\\n\\nArgs:\\n    purchase_order_id: The ERP Purchase Order ID.\\n    sku_id: The SKU identifier to transfer.\\n    transfer_qty: Quantity of units to lock and transfer.\\n    simulate_carrier_fault: Set True to simulate an HTTP 503 carrier outage and trigger ACID rollback.\\n\\nReturns:\\n    A deterministic saga execution receipt with forward or reverse-compensated status.\", \"name\": \"execute_spanner_compensating_saga\", \"parameters\": {\"properties\": {\"purchase_order_id\": {\"type\": \"STRING\"}, \"sku_id\": {\"type\": \"STRING\"}, \"transfer_qty\": {\"type\": \"INTEGER\"}, \"simulate_carrier_fault\": {\"default\": false, \"type\": \"BOOLEAN\"}}, \"required\": [\"purchase_order_id\", \"sku_id\", \"transfer_qty\"], \"type\": \"OBJECT\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-9262cf1e-b571-4542-8151-69f3bf66b5b9\", \"args\": {\"purchase_order_id\": \"PO-4500019280\"}, \"name\": \"verify_erp_purchase_order\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-9262cf1e-b571-4542-8151-69f3bf66b5b9\", \"name\": \"verify_erp_purchase_order\", \"response\": {\"purchase_order_id\": \"PO-4500019280\", \"vendor_name\": \"Rheinmetall Industrial Components GmbH\", \"sku_id\": \"SKU-7740-EU\", \"ordered_qty\": 1200, \"received_qty_rotterdam\": 850, \"shortfall_qty\": 350, \"unit_price_usd\": 120.0, \"discrepancy_usd\": 42000.0, \"three_way_match_status\": \"QTY_SHORTFALL_DETECTED\", \"vendor_bank_iban\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:VENDOR_BANK_IBAN]\", \"swift_routing_code\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:SWIFT_ROUTING_CODE]\", \"confidential_margin_floor\": \"[REDACTED_BY_GOOGLE_CLOUD_SDP:CONFIDENTIAL_MARGIN_FLOOR]\", \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 3, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0\", \"args\": {\"sku_id\": \"SKU-7740-EU\"}, \"name\": \"check_spanner_hub_inventory\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-39b1c47e-0ba2-44f4-a6fd-5ddad61b37b0\", \"name\": \"check_spanner_hub_inventory\", \"response\": {\"sku_id\": \"SKU-7740-EU\", \"hub_region\": \"EU\", \"spanner_truetime_snapshot\": \"2026-11-10T08:55:00.000142Z\", \"rotterdam_hub_available_qty\": 0, \"frankfurt_hub_available_qty\": 620, \"frankfurt_safety_stock_floor\": 200, \"eligible_inter_hub_transfer_qty\": 420, \"recommended_source_hub\": \"FRANKFURT_HUB_DE02\", \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-b4ca0357-8d67-448b-9d36-42dd52f664b4\", \"args\": {\"shortfall_qty\": 350, \"purchase_order_id\": \"PO-4500019280\"}, \"name\": \"calculate_financial_exposure\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-b4ca0357-8d67-448b-9d36-42dd52f664b4\", \"name\": \"calculate_financial_exposure\", \"response\": {\"purchase_order_id\": \"PO-4500019280\", \"shortfall_inventory_value_usd\": 42000.0, \"contract_sla_clause\": \"INCOTERMS-2026-DDP-48H-PENALTY\", \"sla_penalty_at_risk_usd\": 18500.0, \"total_financial_exposure_usd\": 60500.0, \"expedited_freight_cost_usd\": 2450.0, \"net_savings_from_remediation_usd\": 58050.0, \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47\", \"args\": {\"purchase_order_id\": \"PO-4500019280\", \"transfer_qty\": 350, \"sku_id\": \"SKU-7740-EU\", \"simulate_carrier_fault\": true}, \"name\": \"execute_spanner_compensating_saga\"}}], \"role\": \"model\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-dbfbd79e-cbfa-4676-80cd-635d0fb55c47\", \"name\": \"execute_spanner_compensating_saga\", \"response\": {\"saga_idempotency_key\": \"e751158925fb\", \"saga_status\": \"ROLLED_BACK_CLEANLY\", \"failed_step\": \"step_3_book_expedited_carrier_a2a\", \"downstream_error\": \"HTTP 503 Service Unavailable from Carrier Booking API\", \"compensated_steps_reverse_order\": [{\"step\": \"step_2_lock_frankfurt_hub_stock\", \"inverse_action\": \"unlock_frankfurt_hub_stock(qty=350)\", \"status\": \"COMPENSATED_OK\"}, {\"step\": \"step_1_amend_erp_purchase_order\", \"inverse_action\": \"release_po_amendment(po='PO-4500019280')\", \"status\": \"COMPENSATED_OK\"}], \"rollback_latency_ms\": 198, \"orphaned_writes\": 0, \"_sdp_governance_metadata\": {\"redacted_fields_this_call\": 0, \"cumulative_redacted_fields\": 3, \"policy\": \"GOOGLE_CLOUD_SDP_PRE_LLM_ENFORCED\"}}}}], \"role\": \"user\"}}, {\"author\": \"root_agent\", \"content\": {\"parts\": [{\"text\": \"Here is the Order-to-Cash Audit Receipt for Purchase Order PO-4500019280:\\n\\n**Order-to-Cash Audit Receipt**\\n\\n**1. Purchase Order Verification (ERP Ledger)**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **SKU ID:** SKU-7740-EU\\n*   **3-Way Match Status:** QTY_SHORTFALL_DETECTED\\n*   **Ordered Quantity:** 1200 units\\n*   **Received Quantity (Rotterdam):** 850 units\\n*   **Shortfall Quantity:** 350 units\\n*   **Unit Price:** $120 USD\\n*   **Discrepancy Value:** $42,000 USD\\n*   **Vendor:** Rheinmetall Industrial Components GmbH\\n*   **SDP Redaction Count (for this step):** 3\\n\\n**2. Real-time Inventory Check (Cloud Spanner)**\\n*   **SKU ID:** SKU-7740-EU\\n*   **Hub Region:** EU\\n*   **Frankfurt Hub Available Quantity:** 620 units\\n*   **Frankfurt Safety Stock Floor:** 200 units\\n*   **Eligible Inter-Hub Transfer Quantity:** 420 units\\n*   **Recommended Source Hub:** FRANKFURT_HUB_DE02\\n*   **Spanner TrueTime Snapshot:** 2026-11-10T08:55:00.000142Z\\n\\n**3. Financial Exposure Analysis (BigQuery)**\\n*   **Purchase Order ID:** PO-4500019280\\n*   **Shortfall Inventory Value:** $42,000 USD\\n*   **SLA Penalty at Risk:** $18,500 USD\\n*   **Expedited Freight Cost (Estimated):** $2,450 USD\\n*   **Total Financial Exposure:** $60,500 USD\\n*   **Net Savings from Remediation:** $58,050 USD\\n*   **Contract SLA Clause:** INCOTERMS-2026-DDP-48H-PENALTY\\n\\n**4. Cloud Spanner Remediation Saga Execution**\\n*   **Saga Status:** ROLLED_BACK_CLEANLY\\n*   **Simulated Fault:** HTTP 503 Service Unavailable from Carrier Booking API\\n*   **Failed Step:** step_3_book_expedited_carrier_a2a (Booking Expedited Freight Carrier)\\n*   **Rollback Latency:** 198 ms\\n*   **Compensated Steps (in reverse order):**\\n    *   **Step 2 (Lock Inventory):** `unlock_frankfurt_hub_stock(qty=350)` - Status: COMPENSATED_OK\\n    *   **Step 1 (Amend PO):** `release_po_amendment(po='PO-4500019280')` - Status: COMPENSATED_OK\\n\\nThe remediation saga successfully demonstrated an ACID reverse rollback due to the simulated carrier fault, ensuring data consistency across all steps.\"}], \"role\": \"model\"}}]}]}"
+      }
+    ]
+  },
+  "agent_info": null
+}

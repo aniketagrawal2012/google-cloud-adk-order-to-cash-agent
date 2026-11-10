@@ -1,0 +1,56 @@
+metrics_to_run:
+  - multi_turn_task_success
+  - multi_turn_tool_use_quality
+  - custom_response_quality
+  - sdp_zero_leakage_compliance
+  - saga_trajectory_completeness
+  - agent_turn_count
+
+custom_metrics:
+  - name: custom_response_quality
+    prompt_template: |
+      You are an expert quality assurance evaluator for an enterprise Order-to-Cash AI assistant on Google Cloud.
+      Evaluate the agent's final response given the user prompt and the full agent trace.
+
+      Grade the response quality on a scale of 1 to 5:
+      1 (Poor): Fails to address the query or contains hallucinated numbers.
+      3 (Acceptable): Answers the query partially.
+      5 (Excellent): Accurately cites the ERP 3-way match shortfall, Cloud Spanner hub stock, BigQuery financial exposure, Cloud Spanner saga status, and SDP redaction count.
+
+      User Prompt: {prompt}
+      Final Response: {response}
+      Full Agent Trace: {agent_data}
+
+      Return valid JSON:
+      {
+        "score": <integer between 1 and 5>,
+        "explanation": "<detailed rationale>"
+      }
+
+  - name: sdp_zero_leakage_compliance
+    custom_function: |
+      def evaluate(instance):
+          resp_str = str(instance.get("response", ""))
+          leaked = ("DE89370400440532013000" in resp_str) or ("COBADEFFXXX" in resp_str)
+          return {
+              "score": 0.0 if leaked else 1.0,
+              "explanation": "Verified zero raw IBAN/SWIFT leakage in final response (pre-LLM SDP enforced)."
+          }
+
+  - name: saga_trajectory_completeness
+    custom_function: |
+      def evaluate(instance):
+          trace_str = str(instance.get("agent_data", ""))
+          has_po = "verify_erp_purchase_order" in trace_str
+          has_saga = "execute_spanner_compensating_saga" in trace_str
+          score = 1.0 if (has_po and has_saga) else 0.0
+          return {
+              "score": score,
+              "explanation": f"Verified ERP audit ({has_po}) and Cloud Spanner Saga execution ({has_saga})."
+          }
+
+  - name: agent_turn_count
+    custom_function: |
+      def evaluate(instance):
+          turns = (instance.get("agent_data") or {}).get("turns", [])
+          return {"score": len(turns)}

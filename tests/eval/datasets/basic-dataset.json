@@ -1,0 +1,26 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "order_to_cash_full_remediation",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU, check EU hub inventory in Cloud Spanner, calculate financial exposure in BigQuery, and execute the remediation saga."
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "carrier_fault_spanner_rollback",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Audit Purchase Order PO-4500019280 for SKU-7740-EU and execute the Cloud Spanner remediation saga with simulate_carrier_fault=True to verify ACID reverse rollback."
+          }
+        ]
+      }
+    }
+  ]
+}
