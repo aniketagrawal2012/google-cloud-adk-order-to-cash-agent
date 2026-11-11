@@ -4,15 +4,16 @@
 import asyncio
 import json
 import os
+
 import vertexai
 
 
 async def main() -> None:
-    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", "aniket-personal")
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project-id")
     location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
     reasoning_engine_id = os.environ.get(
         "REASONING_ENGINE_RESOURCE_NAME",
-        "projects/551887116707/locations/us-central1/reasoningEngines/366446609694720000",
+        "projects/551887XXXXXX/locations/us-central1/reasoningEngines/366446609694720000",
     )
 
     client = vertexai.Client(project=project_id, location=location)
@@ -27,10 +28,9 @@ async def main() -> None:
     print(f"Created Remote Session ID: {session_id}")
 
     prompt = (
-        "Please execute all 4 steps now for PO-99812 (120 units of SKU-H100-NVL in US): "
-        "verify_erp_purchase_order, check_spanner_hub_inventory, "
-        "calculate_financial_exposure, and execute_spanner_compensating_saga, "
-        "and provide the Order-to-Cash Audit Receipt."
+        "Audit Purchase Order PO-99812 for SKU-7740-EU, check EU hub inventory "
+        "in Cloud Spanner, calculate financial exposure in BigQuery, and execute "
+        "the remediation saga, returning the complete Order-to-Cash Audit Receipt."
     )
     events = []
     async for event in remote_agent.async_stream_query(

@@ -29,9 +29,13 @@ try:
     _, project_id = google.auth.default()
 except Exception:
     project_id = None
-os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id or "aniket-personal")
+os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id or "your-gcp-project-id")
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "us-central1")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
+
+# Benchmarked live on "gemini-2.5-flash" (Trace 404feb61ac9b6cdbfb092e726e7b94e6);
+# override GEMINI_MODEL to test "gemini-2.5-pro" or Model Garden aliases ("gemini-3.5-flash", "gemini-4-argon").
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 
 RESTRICTED_ERP_FIELDS = {
     "vendor_bank_iban",
@@ -251,7 +255,7 @@ def execute_spanner_compensating_saga(
 root_agent = Agent(
     name="root_agent",
     model=Gemini(
-        model="gemini-2.5-flash",
+        model=GEMINI_MODEL,
         retry_options=types.HttpRetryOptions(attempts=3),
     ),
     instruction=(

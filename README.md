@@ -113,7 +113,7 @@ agents-cli publish gemini-enterprise \
 order-to-cash-agent/
 ├── .agents-cli-spec.md                # Agent specification & guardrail contract
 ├── GEMINI.md                          # ADK coding & lifecycle guidance
-├── Makefile                           # Common install, test, lint, and deploy targets
+├── agents-cli-manifest.yaml           # Agent scaffold & runtime manifest
 ├── pyproject.toml                     # Package dependencies (google-adk, google-cloud-aiplatform)
 ├── app/
 │   ├── agent.py                       # Root ADK Agent + SHA-256 loop breaker + SDP redaction + 4 tools
@@ -122,6 +122,7 @@ order-to-cash-agent/
 │       ├── telemetry.py               # OpenTelemetry & GenAI completion hook configuration
 │       └── typing.py                  # Structured feedback & trace schemas
 ├── scripts/
+│   ├── provision_context_cache.py     # Explicit Vertex AI Context Cache builder for static SOP/schemas
 │   └── verify_remote_agent_engine.py  # Live async_stream_query verification against Agent Engine
 └── tests/
     ├── eval/
