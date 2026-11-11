@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 from types import SimpleNamespace
 
 from app.agent import (
+    GEMINI_MODEL,
     calculate_financial_exposure,
     check_spanner_hub_inventory,
     execute_spanner_compensating_saga,
@@ -22,6 +24,12 @@ from app.agent import (
     sha256_sliding_window_loop_breaker,
     verify_erp_purchase_order,
 )
+
+
+def test_default_gemini_model_uses_non_retired_ga_endpoint() -> None:
+    if "GEMINI_MODEL" not in os.environ:
+        assert GEMINI_MODEL == "gemini-3.8-flash"
+    assert os.environ.get("GOOGLE_CLOUD_LOCATION") == "global"
 
 
 def test_verify_erp_purchase_order_contains_3_way_match() -> None:

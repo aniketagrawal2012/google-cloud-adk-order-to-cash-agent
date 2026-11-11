@@ -1,6 +1,8 @@
 # Enterprise Order-to-Cash & Supply-Chain Governance Agent on Google Cloud
 
-**Production Reference Implementation: Google Agent Development Kit (ADK 2.2) • Vertex AI Agent Engine (`ReasoningEngine`) • Vertex AI GenAI Evaluation Service • Cloud Spanner • BigQuery • Sensitive Data Protection (SDP) • Gemini Enterprise**
+**Production Reference Implementation: Google Agent Development Kit (ADK 2.2) • Gemini 3.8 Flash, Gemini 4 Argon & Gemini 4 Carbon • Vertex AI Agent Engine (`ReasoningEngine`) • Vertex AI GenAI Evaluation Service • Cloud Spanner • BigQuery • Sensitive Data Protection (SDP) • Gemini Enterprise**
+
+> **Model Lifecycle & Verification Note (November 2026):** Per Google Cloud's official [Gemini Model Versions & Lifecycle](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions), `gemini-2.5-flash` and `gemini-2.5-pro` reached their October 20, 2026 retirement date. [`app/agent.py`](app/agent.py) and [`scripts/provision_context_cache.py`](scripts/provision_context_cache.py) default to **`gemini-3.8-flash`** (GA through Sept 2, 2027+) on **`GOOGLE_CLOUD_LOCATION=global`**, with one-env-var switching to **`gemini-4-argon`** (GA through Oct 13, 2027+) and **`gemini-4-carbon`** (Nov 10, 2026 release). Full Agent Engine OpenTelemetry traces (`Trace 404feb61ac9b6cdbfb092e726e7b94e6`) were captured on the `gemini-2.5-flash` baseline and side-by-side structured audit synthesis was verified live in Google Cloud Agent Studio Compare on `gemini-4-carbon` and `gemini-3.8-flash`.
 
 This repository contains the complete, runnable source code, deterministic callback guardrails, Cloud Spanner compensating saga implementation, and Vertex AI evaluation suite for the **Enterprise Order-to-Cash & Supply-Chain Multi-Agent System on Google Cloud**.
 
@@ -48,7 +50,8 @@ GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
 
 # Or launch the interactive ADK Web Playground UI (http://127.0.0.1:8089)
 GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
-  GOOGLE_CLOUD_LOCATION=us-central1 \
+  GOOGLE_CLOUD_LOCATION=global \
+  GEMINI_MODEL=gemini-3.8-flash \
   GOOGLE_GENAI_USE_VERTEXAI=True \
   uv run adk web --port 8089
 ```
@@ -79,9 +82,10 @@ GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
 ### Step 4: Deploy to Vertex AI Agent Engine (`ReasoningEngine`)
 
 ```bash
-# Deploy managed ADK runtime container with OpenTelemetry & Cloud Trace enabled
+# Deploy managed ADK runtime container to us-central1 while routing Gemini 3.8 / Gemini 4 inference via global endpoint
 GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
-  GOOGLE_CLOUD_LOCATION=us-central1 \
+  GOOGLE_CLOUD_LOCATION=global \
+  GEMINI_MODEL=gemini-3.8-flash \
   agents-cli deploy \
   --project your-gcp-project-id \
   --region us-central1 \

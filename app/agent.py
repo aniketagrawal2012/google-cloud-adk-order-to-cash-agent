@@ -30,12 +30,12 @@ try:
 except Exception:
     project_id = None
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id or "your-gcp-project-id")
-os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "us-central1")
+os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
-# Benchmarked live on "gemini-2.5-flash" (Trace 404feb61ac9b6cdbfb092e726e7b94e6);
-# override GEMINI_MODEL to test "gemini-2.5-pro" or Model Garden aliases ("gemini-3.5-flash", "gemini-4-argon").
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+# Default to GA "gemini-3.8-flash" on "global" (official Oct 20, 2026 replacement for gemini-2.5-flash);
+# override GEMINI_MODEL for "gemini-4-argon" (GA) or "gemini-4-carbon" (verified in Agent Studio Compare).
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 
 RESTRICTED_ERP_FIELDS = {
     "vendor_bank_iban",
@@ -260,7 +260,7 @@ root_agent = Agent(
     ),
     instruction=(
         "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on "
-        "Google Cloud (ADK 2.0 + Vertex AI Agent Runtime + Cloud Spanner + BigQuery). "
+        "Google Cloud (ADK 2.2 + Vertex AI Agent Engine + Cloud Spanner + BigQuery). "
         "When auditing a Purchase Order discrepancy or supply-chain shortfall:\n"
         "1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n"
         "2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n"

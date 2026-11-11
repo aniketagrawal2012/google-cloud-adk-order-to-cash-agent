@@ -39,14 +39,15 @@ def build_static_o2c_corpus() -> str:
 
 def create_enterprise_o2c_context_cache(
     project_id: str | None = None,
-    location: str = "us-central1",
+    location: str | None = None,
     model: str | None = None,
     ttl: str = "3600s",
 ) -> str:
     """Pins the static Order-to-Cash prefix into Vertex AI Explicit Context Caching."""
     resolved_project = project_id or os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project-id")
-    resolved_model = model or os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
-    client = genai.Client(vertexai=True, project=resolved_project, location=location)
+    resolved_location = location or os.environ.get("GOOGLE_CLOUD_LOCATION", "global")
+    resolved_model = model or os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+    client = genai.Client(vertexai=True, project=resolved_project, location=resolved_location)
 
     cache = client.caches.create(
         model=resolved_model,
