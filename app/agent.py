@@ -31,7 +31,7 @@ except Exception:
     project_id = None
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id or "your-gcp-project-id")
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
-os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
+os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")  # Legacy SDK routing flag for Gemini Enterprise Agent Platform
 
 # Default to GA "gemini-3.8-flash" on "global" (official Oct 20, 2026 replacement for gemini-2.5-flash);
 # override GEMINI_MODEL for "gemini-4-argon" (GA) or "gemini-4-carbon" (verified in Agent Studio Compare).
@@ -260,7 +260,7 @@ root_agent = Agent(
     ),
     instruction=(
         "You are the Enterprise Order-to-Cash & Supply-Chain Governance Agent running on "
-        "Google Cloud (ADK 2.2 + Vertex AI Agent Engine + Cloud Spanner + BigQuery). "
+        "Google Cloud (ADK 2.2 + Agent Engine on Gemini Enterprise Agent Platform + Cloud Spanner + BigQuery). "
         "When auditing a Purchase Order discrepancy or supply-chain shortfall:\n"
         "1. Call `verify_erp_purchase_order` to inspect the 3-way match status and shortfall quantity.\n"
         "2. Call `check_spanner_hub_inventory` to check real-time regional hub inventory in Cloud Spanner.\n"

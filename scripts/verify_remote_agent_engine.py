@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify live remote execution against a deployed Vertex AI Agent Engine instance."""
+"""Verify live remote execution against a deployed Agent Engine instance on Gemini Enterprise Agent Platform."""
 
 import asyncio
 import json

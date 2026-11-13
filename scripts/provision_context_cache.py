@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Provision an Explicit Vertex AI Context Cache for static Order-to-Cash SOP & MCP schemas."""
+"""Provision an Explicit Gemini Platform Context Cache for static Order-to-Cash SOP & MCP schemas."""
 
 import os
 from pathlib import Path
@@ -43,7 +43,7 @@ def create_enterprise_o2c_context_cache(
     model: str | None = None,
     ttl: str = "3600s",
 ) -> str:
-    """Pins the static Order-to-Cash prefix into Vertex AI Explicit Context Caching."""
+    """Pins the static Order-to-Cash prefix into Gemini Enterprise Agent Platform Explicit Context Caching."""
     resolved_project = project_id or os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project-id")
     resolved_location = location or os.environ.get("GOOGLE_CLOUD_LOCATION", "global")
     resolved_model = model or os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
@@ -61,7 +61,7 @@ def create_enterprise_o2c_context_cache(
             ttl=ttl,
         ),
     )
-    print(f"Provisioned Vertex AI Explicit Context Cache: {cache.name}")
+    print(f"Provisioned Gemini Platform Explicit Context Cache: {cache.name}")
     return str(cache.name)
 
 

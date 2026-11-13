@@ -25,7 +25,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Initialize Vertex AI and load agent config
+# Initialize Gemini Enterprise Agent Platform client and load agent config
 with open("deployment_metadata.json", encoding="utf-8") as f:
     remote_agent_runtime_id = json.load(f)["remote_agent_runtime_id"]
 
